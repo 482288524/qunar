@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.BusinessInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.BusinessInfo">
+        <id column="business_id" jdbcType="INTEGER" property="businessId"/>
+        <result column="interval_plan_id" jdbcType="INTEGER" property="intervalPlanId"/>
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="business_name" jdbcType="VARCHAR" property="businessName"/>
+        <result column="business_type" jdbcType="INTEGER" property="businessType"/>
+        <result column="business_flag" jdbcType="INTEGER" property="businessFlag"/>
+        <result column="prefix_queue_no" jdbcType="VARCHAR" property="prefixQueueNo"/>
+        <result column="prefix_priority_no" jdbcType="VARCHAR" property="prefixPriorityNo"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+        <result column="week_set" jdbcType="INTEGER" property="weekSet"/>
+    </resultMap>
+
+    <select id="getBusinessInfo" parameterType="businessInfo" resultMap="BaseResultMap">
+        select * from t_business_info BI
+        where 1=1
+        <if test="businessInfo.intervalPlanId != null and businessInfo.intervalPlanId != ''">
+            AND BI.interval_plan_id = #{businessInfo.intervalPlanId}
+        </if>
+        <if test="businessInfo.departmentId != null and businessInfo.departmentId != ''">
+            AND BI.department_id = #{businessInfo.departmentId}
+        </if>
+        <if test="businessInfo.businessName != null and businessInfo.businessName != ''">
+            AND BI.business_name like '%${businessInfo.businessName}%'
+        </if>
+        <if test="businessInfo.businessType != null and businessInfo.businessType != ''">
+            AND BI.business_type = #{businessInfo.businessType}
+        </if>
+    </select>
+
+    <delete id="delInterPlanLstById" parameterType="Integer">
+        DELETE FROM
+            t_interval_plan_lst
+        WHERE
+            interval_plan_id = #{planId}
+    </delete>
+
+    <select id="getNextPlanId" parameterType="Integer" resultType="Integer">
+        SELECT
+            max(tbi.interval_plan_id) + 1
+        FROM
+            t_business_info tbi
+        WHERE
+            tbi.department_id = #{departmentId}
+        GROUP BY
+            SUBSTR(
+                CONCAT(tbi.interval_plan_id)
+                FROM
+                    1 FOR 1
+            )
+    </select>
+
+    <select id="countIntervalPlanNum" parameterType="map" resultType="Integer">
+        SELECT
+            count(1)
+        FROM
+            t_business_info tbi,
+            t_interval_plan_lst tipl
+        WHERE
+            tbi.department_id = #{departmentId}
+            AND tbi.interval_plan_id = tipl.interval_plan_id
+            AND tbi.week_set = #{week}
+            AND tipl.bgn_tm = #{bgnTime}
+            AND tipl.end_tm = #{endTime}
+    </select>
+
+</mapper>

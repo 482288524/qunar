@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.SysSetMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.SysSet">
+        <id column="set_id" jdbcType="INTEGER" property="setId"/>
+        <result column="check_max_day_num" jdbcType="INTEGER" property="checkMaxDayNum"/>
+        <result column="gh_if_msg_push" jdbcType="TINYINT" property="ghIfMsgPush"/>
+        <result column="msg_num" jdbcType="INTEGER" property="msgNum"/>
+        <result column="server_ip" jdbcType="VARCHAR" property="serverIp"/>
+        <result column="holidays" jdbcType="VARCHAR" property="holidays"/>
+        <result column="register_max_day_num" jdbcType="INTEGER" property="registerMaxDayNum"/>
+    </resultMap>
+
+    <select id="getSysSet" parameterType="sysSet" resultMap="BaseResultMap">
+        select * from t_sys_set syset
+        where 1=1
+        <if test="sysSet.checkMaxDayNum != null and sysSet.checkMaxDayNum != ''">
+            AND syset.check_max_day_num &lt; #{sysSet.checkMaxDayNum}
+        </if>
+        <if test="sysSet.serverIp != null and sysSet.serverIp != ''">
+            AND syset.server_ip &lt; #{sysSet.serverIp}
+        </if>
+        <if test="sysSet.registerMaxDayNum != null and sysSet.registerMaxDayNum != ''">
+            AND syset.register_max_day_num = #{sysSet.registerMaxDayNum}
+        </if>
+        order by syset.check_max_day_num
+    </select>
+
+
+</mapper>

@@ -1,0 +1,167 @@
+.center .right {
+    float: left;
+    margin-left: 20px;
+    width: 980px;
+    height: 600px;
+}
+
+.xxk .right-t {
+    float: left;
+    width: 980px;
+    height: 36px;
+    border-bottom: 2px #2291AE solid;
+    background: url("../images/user1.gif") 10px 10px no-repeat;
+}
+
+.xxk .right-t h4 {
+    float: left;
+    margin-top: 8px;
+    margin-left: 26px;
+    color: #2291AE;
+    font-weight: bold;
+}
+
+.xxk .right-t button {
+    margin-top: 4px;
+    margin-left: 530px;
+    width: 108px;
+    height: 25px;
+    color: #fff;
+    outline: none;
+    border-radius: 5px;
+    background-color: #2291AE;
+}
+
+.xxk ul {
+    margin-bottom: 0;
+    height: 36px;
+    clear: left;
+}
+
+.xxk ul li {
+    float: left;
+    text-align: center;
+    padding-top: 8px;
+    height: 36px;
+    width: 156px;
+    background-color: #E9F1F2;
+}
+
+.xxk .right-b {
+    float: left;
+    width: 980px;
+    height: 528px;
+}
+
+.xxk .right-b h4 {
+    float: left;
+    margin-left: 478px;
+    margin-top: 150px;
+}
+
+.center th,
+td {
+    text-align: center;
+}
+
+.xxk .sousuo2 {
+    width: 980px;
+    height: 25px;
+    margin-top: 40px;
+}
+
+.xxk .sousuo2 .selectInput,
+.xxk .sousuo2 .selectDiv {
+    float: left;
+    height: 25px;
+    border: 1px #E0E0E0 solid;
+}
+
+.xxk .sousuo2 .selectInput {
+    width: 168px;
+}
+
+.xxk .sousuo2 .selectDiv {
+    width: 28px;
+    margin-right: 110px;
+    border-left: none;
+    background: url('../images/sousuo.png') -6px -6px no-repeat;
+}
+
+.xxk .sousuo2 .selectInput:hover {
+    border-color: #A0A0A0;
+}
+
+.xxk .sousuo2 .selectInput:hover+.selectDiv {
+    border-color: #A0A0A0;
+}
+
+.xxk .sousuo2 .selectInput:focus {
+    outline: none;
+    border-color: #57A7FB;
+}
+
+.xxk .sousuo2 .selectInput:focus+.selectDiv {
+    border-color: #57A7FB;
+}
+
+.xxk .sousuo2 .selectDiv:hover {
+    cursor: pointer;
+}
+
+.xxk .right-b .add {
+    float: left;
+    margin-top: -24px;
+    margin-left: 907px;
+    margin-bottom: 20px;
+    width: 40px;
+}
+
+.xxk .right-b table tr td button {
+    width: 30px;
+    margin-right: 2px;
+    font-size: 12px;
+}
+
+.modal-header .close {
+    margin-top: -42px;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.modal-body form {
+    margin: auto;
+    width: 250px;
+}
+
+.modal-body form table tr {
+    height: 30px;
+}
+
+.modal-body form table tr td input{
+    padding-left: 4px;
+}
+
+.modal-body form table td:nth-child(2){
+    padding-left: 6px;
+}
+
+.modal-body form table td{
+    text-align: right;
+}
+
+.modal-body form table .sex{
+    text-align: center;
+}
+
+.modal-body form table td #birth,
+#birthT {
+    width: 178px;
+} 
+
+.modal .btn-primary{
+    margin-top: 0;
+    margin-left: 250px;
+}

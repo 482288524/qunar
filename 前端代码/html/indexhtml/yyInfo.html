@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>预约信息</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/hospitalHead.css">
+    <link rel="stylesheet" href="../../css/yyInfo.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../jQuery/dist/jquery.validate.min.js"></script>
+    <script src="../../jQuery/dist/localization/messages_zh.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/cookie.js"></script>
+    <style></style>
+</head>
+
+<body>
+    <div>
+        <div class="header"></div>
+        <div class="center">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#appoint" data-toggle="tab">预约挂号</a>
+                </li>
+                <li>
+                    <a href="#info" data-toggle="tab">医院介绍</a>
+                </li>
+                <li>
+                    <a href="#notice" data-toggle="tab">预约须知</a>
+                </li>
+                <li>
+                    <a href="#tz" data-toggle="tab">停诊信息</a>
+                </li>
+                <li><a onclick="jumpAyygh()" id="reselect">选择其它医院</a></li>
+            </ul>
+            <div id="myTabContent2" class="tab-content">
+                <div class="tab-pane fade in active" id="appoint">
+                    <div class="rule1">
+                        <img src="../../images/wsxx.jpg" width="148" height="147">
+                        <div>
+                            <p>
+                                <span>预约规则</span>
+                                <span>(可预约班次更新时间每日8:00更新)</span>
+                            </p>
+                            <p>预约周期：7天</p>
+                            <p>停挂时间：14:00:00</p>
+                            <p>退号时间：就诊前一工作日14:00前取消</p>
+                            <P>
+                                特殊规则：
+                                <p class="p2">①取号地点不同：西院区预约号取号地点：西院区门诊楼一层大厅挂号窗口取号。东院区预约
+                                    号取号地点：东院区老门诊楼一层大厅挂号窗口或新门诊楼各楼层挂号/收费窗口取号。</p>
+                            </P>
+                        </div>
+                        <hr>
+                        <p>
+                            <span class="hosId"></span>
+                            <span class="right time"></span>
+                        </p>
+                        <p>
+                            <span class="depId"></span>
+                            <span class="right">医事服务费：￥50.00</span>
+                        </p>
+                    </div>
+                    <div class="yyMsg">
+                        <h4>请您完善相关信息进行预约</h4>
+                        <form id="appointMsg" class="add-form">
+                            <table>
+                                <tr>
+                                    <td>就&nbsp;诊&nbsp;人:</td>
+                                    <td class="jzr">
+                                        <input type="radio" name="jzr" id="rad" checked>
+                                        <label for="rad" id="jzrMsg">123</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td id="addjzr"><a>+添加就诊人</a></td>
+                                <tr>
+                                    <td>卡&nbsp;类&nbsp;型:</td>
+                                    <td>
+                                        <select id="cardType" name="cardType">
+                                            <option value="-1">====请选择持卡类型====</option>
+                                            <option value="0">居民健康卡</option>
+                                            <option value="1">就诊卡</option>
+                                            <option value="2">临时就诊卡</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>卡&nbsp;号:</td>
+                                    <td>
+                                        <input type="text" name="cardNo" id="cardNo">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>身&nbsp;份&nbsp;证&nbsp;号:</td>
+                                    <td>
+                                        <input type="text" name="idCardNo" id="idCardNo">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>特&nbsp;殊&nbsp;情&nbsp;况:</td>
+                                    <td class="pro-td">
+                                        <!-- <input type="checkbox" name="priority" id="priority1" checked>
+                                        <label for="priority1" id="">无</label> -->
+                                        <input type="checkbox" name="priority" id="priority2" value="1">
+                                        <label for="priority2" id="">重症患者</label>
+                                        <input type="checkbox" name="priority" id="priority3" value="2">
+                                        <label for="priority3" id="">残疾</label>
+                                        <input type="checkbox" name="priority" id="priority4" value="3">
+                                        <label for="priority4" id="">老人</label>
+                                        <input type="checkbox" name="priority" id="priority5" value="4">
+                                        <label for="priority5" id="">孕妇</label>
+                                        <input type="checkbox" name="priority" id="priority6" value="5">
+                                        <label for="priority6" id="">幼儿</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn1" onclick="confirm2()">预约</button></td>
+                                    <td><button type="button" class="btn2" onclick="rtyy()">返回</button></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="hidden" name="hosName" id="hosName"></td>
+                                    <td><input type="hidden" name="time" id="time"></td>
+                                    <td><input type="hidden" name="depName" id="depName"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="hidden" name="status" id="status" value="已预约"></td>
+                                    <td><input type="hidden" name="doctorName" id="doctorName"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".header").load("../indexhtml/header.html");
+            $(".footer").load("../indexhtml/footer.html");
+        });
+
+        //点击选择其它医院跳转至按医院挂号界面
+        function jumpAyygh() {
+            window.location.href = "./ayygh.html";
+        }
+        var planId;
+        window.onload = function () {
+            let paras = location.search;			//search获得地址中的参数，内容为'?id='
+            let result = paras.match(/[^\?&]*=[^&]*/g); 	//match是字符串中符合的字段一个一个取出来
+            paras = {};					//让paras变成没有内容的json对象
+            for (i in result) {
+                let temp = result[i].split('=');	//split()将一个字符串分解成一个数组,两次遍历result中的值分别为['id','xx']
+                paras[temp[0]] = temp[1];
+            }
+            planId = paras.planId;
+            // console.log(paras)
+            let hosId = paras.hosId,
+                depId = paras.depId,
+                d = paras.day,
+                doctorName = decodeURI(paras.doctorName);
+            $("#doctorName").val(doctorName);
+            // console.log(paras)
+            // console.log(doctorName)
+            // console.log(hosId,depId,id)
+            let date = new Date(),
+                y = date.getFullYear(),
+                m = date.getMonth() + 1;
+            d = parseInt(date.getDate()) + parseInt(d);
+            if (m > 0 && m < 10) {         //月份格式化
+                m = "0" + m;
+            }
+            if (d >= 0 && d < 10) {    //天数格式化
+                d = "0" + d;
+            }
+            $(".time")[0].innerHTML = '时间：' + y + "-" + m + "-" + d;
+            $("#time").val(y + "-" + m + "-" + d);
+            getAjax("http://localhost:8080/selectHospital?hospitalId=" + hosId, getHosName);
+            getAjax("http://localhost:8080/selectDepartmentInfo?departmentId=" + depId, getDepName);
+            getAjax("http://localhost:8080/selectUser?userId=" + getUserId(), getJzrMsg);
+
+            function getHosName(data) {
+                let hosName = data.hospitalList[0].hospitalName;
+                // console.log(hosName)
+                $(".hosId")[0].innerHTML = '医院：' + hosName;
+                $("#hosName").val(hosName);
+            }
+
+            function getDepName(data) {
+                let DepInfoList = data.result;
+                // console.log(DepInfoList)
+                // console.log(DepInfoList[0].type)
+                // console.log(DepInfoList[0].data[0].name)
+                for (let i in DepInfoList) {
+                    let DepNameList = DepInfoList[i].data;
+                    let departmentId;
+                    for (let j in DepNameList) {
+                        departmentId = DepNameList[j].id;
+                        let depName = DepNameList[j].name;
+                        while (depId == departmentId) {
+                            $(".depId")[0].innerHTML = '科室：' + depName;
+                            $("#depName").val(depName);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            function getJzrMsg(data) {
+                // console.log(data)
+                let jzrMsg = data.userList[0].realName + "|" + data.userList[0].phoneNumber;
+                $("#jzrMsg")[0].innerHTML = '' + jzrMsg;
+            }
+
+            window.rtyy = function () {
+                console.log(depId)
+                window.location.href = `./yy.html?hosId=${hosId}&depId=${depId}`;
+            }
+        }
+
+        function getAjax(url, func) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    func(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        //身份证验证方法
+        function isIdCardNo(idCardNo) {
+            var factorArr = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1);
+            var parityBit = new Array("1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2");
+            var varArray = new Array();
+            var intValue;
+            var lngProduct = 0;
+            var intCheckDigit;
+            var intStrLen = idCardNo.length;
+            var idNumber = idCardNo;
+            //initialize
+            if ((intStrLen != 15) && (intStrLen != 18)) {
+                return false;
+            }
+            // check andset value
+            for (i = 0; i < intStrLen; i++) {
+                varArray[i] = idNumber.charAt(i);
+                if ((varArray[i] < '0' || varArray[i] > '9') && (i != 17)) {
+                    return false;
+                } else if (i < 17) {
+                    varArray[i] = varArray[i] * factorArr[i];
+                }
+            }
+
+
+            if (intStrLen == 18) {
+                //check date
+                var date8 = idNumber.substring(6, 14);
+                if (isDate8(date8) == false) {
+                    return false;
+                }
+                // calculate the sum of the products
+                for (i = 0; i < 17; i++) {
+                    lngProduct = lngProduct + varArray[i];
+                }
+                // calculate the check digit
+                intCheckDigit = parityBit[lngProduct % 11];
+                // check last digit
+                if (varArray[17] != intCheckDigit) {
+                    return false;
+                }
+            }
+            else {       //length is 15
+                //check date
+                var date6 = idNumber.substring(6, 12);
+                if (isDate6(date6) == false) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        function isDate6(sDate) {
+            if (!/^[0-9]{6}$/.test(sDate)) {
+                return false;
+            }
+            var year, month, day;
+            year = sDate.substring(0, 4);
+            month = sDate.substring(4, 6);
+            if (year < 1700 || year > 2500) returnfalse
+            if (month < 1 || month > 12) return false
+            return true
+        }
+        function isDate8(sDate) {
+            if (!/^[0-9]{8}$/.test(sDate)) {
+                return false;
+            }
+            var year, month, day;
+            year = sDate.substring(0, 4);
+            month = sDate.substring(4, 6);
+            day = sDate.substring(6, 8);
+            var iaMonthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+            if (year < 1700 || year > 2500) return false
+            if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) iaMonthDays[1] = 29;
+            if (month < 1 || month > 12) return false
+            if (day < 1 || day > iaMonthDays[month - 1]) return false
+            return true
+        }
+
+        function confirm2() {
+            if ($("#cardType").val() == -1) {
+                alert("请选择持卡类型!")
+            } else if ($("#cardNo").val() == "" || $("#cardNo").val() == null) {
+                alert("请输入卡号!")
+            } else if ($("#idCardNo").val() == "" || $("#idCardNo").val() == null) {
+                alert("请输入身份证号!")
+            } else if (!isIdCardNo($("#idCardNo").val())) {
+                alert("身份证号格式错误!")
+            } else {
+                console.log($("#appointMsg").serialize())
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/insertPatient?userId=" + getUserId() + "&id=" + planId,
+                    dataType: "json",
+                    data: $("#appointMsg").serialize(),
+                    success: function (data) {
+                        alert("预约成功!"),
+                            window.location.href = '../userhtml/user.html?';
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+
+</html>

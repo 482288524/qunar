@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>医生个人中心</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../../css/adminCenter.css" type="text/css">
+    <script src="../../js/cookie.js"></script>
+    <style>
+        #top .top-t .top-t-center #registBtn {
+            display: none;
+        }
+
+        #top .top-t .top-t-center #exit {
+            display: block;
+        }
+
+        #top .top-t .top-t-center #help {
+            margin-left: 10px;
+        }
+
+        .center {
+            margin-top: 59px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="header"></div>
+        <div class="center">
+            <div class="left">
+                <div class="tx">
+                    <img src="../../images/tx_doctor.png" width="256" height="256">
+                    <span>[<a class="index">首页</a>]</span>
+                    <span>[<a class="exit">退出</a>]</span>
+                </div>
+                <ul class="ul4">
+                    <li class="active"><a href="#myPatient" class="bt">我的病人</a></li>
+                    <li><a href="#myInfo" class="bt">我的信息</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div class="patientManagement"></div>
+                <div class="myInfo"></div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".header").load("../indexhtml/header.html");
+            $(".patientManagement").load("./myPatient.html");
+            $(".myInfo").load("./myInfo.html");
+            $(".footer").load("../indexhtml/footer.html");
+            setTimeout(function(){
+                console.log($("#shouye").text())
+                $("#shouye").css('display','none');
+            },100)
+
+            let ul4 = document.getElementsByClassName("ul4")[0];
+            let li = ul4.getElementsByTagName("li");
+            let div = document.getElementsByClassName("xxk");
+            for (let i = 0,len = li.length; i < len; i++) {
+                li[i].index = i;
+                li[i].onclick = function () {
+                    for (let i = 0,len = li.length; i < len; i++) {
+                        li[i].className = "";
+                    }
+                    this.className = "active";
+                    for (let j = 0,len = div.length; j < len; j++) {
+                        div[j].className = "xxk hide";
+                    }
+                    div[this.index].className = "xxk show";
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

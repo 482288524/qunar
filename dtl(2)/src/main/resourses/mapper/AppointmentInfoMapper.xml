@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AppointmentInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.AppointmentInfo">
+        <id column="appointment_id" jdbcType="BIGINT" property="appointmentId"/>
+        <result column="pool_list_id" jdbcType="BIGINT" property="poolListId"/>
+        <result column="bill_no" jdbcType="VARCHAR" property="billInfo"/>
+        <result column="enqueue_tm" jdbcType="TIMESTAMP" property="enqueueTm"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="pool_num" jdbcType="INTEGER" property="poolNum"/>
+    </resultMap>
+
+    <select id="getAppointmentInfo" parameterType="appointmentInfo" resultMap="BaseResultMap">
+        select * from t_appointment_info apInfo
+        where 1=1
+        <if test="appointmentInfo.poolListId != null and appointmentInfo.poolListId != ''">
+            AND apInfo.pool_list_id like '%${appointmentInfo.poolListId}%'
+        </if>
+        <if test="appointmentInfo.billInfo != null and appointmentInfo.billInfo != ''">
+            AND apInfo.bill_no like '%${appointmentInfo.billInfo}%'
+        </if>
+        <if test="appointmentInfo.enqueueTm != null and appointmentInfo.enqueueTm != ''">
+            AND apInfo.enqueue_tm like '%${appointmentInfo.enqueueTm}%'
+        </if>
+        <if test="appointmentInfo.status != null and appointmentInfo.status != ''">
+            AND apInfo.status like '%${appointmentInfo.status}%'
+        </if>
+        <if test="appointmentInfo.poolNum != null and appointmentInfo.poolNum != ''">
+            AND apInfo.pool_num like '%${appointmentInfo.poolNum}%'
+        </if>
+    </select>
+
+</mapper>

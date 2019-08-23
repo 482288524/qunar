@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>header</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index.css" type="text/css">
+    <!-- <script src="../../jQuery/jQuery.min.js"></script> -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/cookie.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #nav{
+            height: 38px;
+            background-color: #60BFF2;
+        }
+
+        #nav .nav {
+            margin: auto;
+            width: 1000px;
+            height: 38px;
+        }
+
+        #nav .nav ul li {
+            list-style: none;
+            float: left;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 8px;
+            width: 120px;
+            height: 38px;
+        }
+
+        #nav .nav ul li:hover a{
+            color: #D7F3FF;
+            cursor: pointer;
+        }
+
+        #nav .nav li a {
+            color: #FFF;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        #top .top-t .top-t-center .exit {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div class="top-t">
+            <div class="top-t-center">
+                <div>
+                    <img src="../../images/dh.png">
+                    <span class="dhyy">010-114/116114电话预约</span>
+                </div>
+                <div>
+                    <span id="welcome">欢迎来到xx市预约挂号统一平台&nbsp;</span>
+                    <a class="a2" id="registBtn" onclick="rgJump()">注册</a>
+                    <a class="a2 exit">退出</a>
+                    <a href="#" id="help">帮助中心</a>
+                </div>
+            </div>
+        </div>
+        <div class="top-b">
+            <div>
+                <img src="../../images/logo.jpg" width="93" height="75">
+                <h2>XX市预约挂号统一平台</h2>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">医院
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">科室</a></li>
+                    <li><a href="#">疾病</a></li>
+                    <li><a href="#">医院</a></li>
+            </div>
+            <input type="text" placeholder="请输入搜索内容">
+            <div class="sousuo">
+                <img src="../../images/sousuo.png" width="40" height="34">
+            </div>
+        </div>
+        <div id="nav">
+            <!-- <div class="rg-top"> -->
+                <div class="nav">
+                    <ul>
+                        <li><a onclick="rtIndex()" id="shouye">首页</a></li>
+                        <li><a onclick="ayygh()">按医院挂号</a></li>
+                        <li><a href="#aksgh">按科室挂号</a></li>
+                        <li><a href="#ajbgh">按疾病挂号</a></li>
+                        <li><a href="#zxgg">最新公告</a></li>
+                    </ul>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            if (isExistKey('userId') == 1) {
+                //alert(getRealName()+'111');
+                document.getElementById("registBtn").style.display = "none";
+                document.getElementsByClassName("exit")[0].style.display = "block";
+                document.getElementById("welcome").innerHTML = "欢迎您," + getRealName();
+                document.getElementsByClassName("exit")[0].innerHTML = "退出";
+            }
+        });
+
+        function rgJump() {
+            window.location.href = "./regist.html";
+        }
+
+        function rtIndex() {
+            window.location.href = "./index.html";
+        }
+
+        $(".exit").on("click", function () {  //将退出按钮的class设置为exit
+            var conf = confirm("您确定要退出吗?");
+            if (conf == true) {
+                window.location.href = "../indexhtml/index.html";
+                dKey('userId');
+            }else{
+            }
+        })
+
+        $(".index").on("click", function () {  //将首页按钮的class设置为index
+            window.location.href = "../indexhtml/index.html";
+        })
+
+        function ayygh(){
+            window.location.href = "../indexhtml/ayygh.html";
+        }
+    </script>
+</body>
+
+</html>

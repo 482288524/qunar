@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.UserRole">
+        <id column="user_role_id" jdbcType="INTEGER" property="userRoleId"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+    </resultMap>
+
+    <select id="getUserRole" parameterType="userRole" resultMap="BaseResultMap">
+        select * from t_user_role ur
+        where 1=1
+        <if test="userRole.userRoleId != null and userRole.userRoleId != ''">
+            AND ur.user_role_id = #{userRole.userRoleId}
+        </if>
+        <if test="userRole.roleId != null and userRole.roleId != ''">
+            AND ur.role_id = #{userRole.roleId}
+        </if>
+        <if test="userRole.userId != null and userRole.userId != ''">
+            AND ur.user_id = #{userRole.userId}
+        </if>
+        <if test="userRole.realName != null and userRole.realName != ''">
+            AND ur.real_name like '%${userRole.realName}%'
+        </if>
+    </select>
+
+</mapper>

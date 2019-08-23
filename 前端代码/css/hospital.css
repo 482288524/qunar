@@ -1,0 +1,172 @@
+.center {
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+    margin-top: 59px;
+}
+
+.center #myTab #reselect {
+    margin-left: 522px;
+    color: #2DA5E1;
+    cursor: pointer;
+}
+
+.center #myTab .active a {
+    background-color: #F7F7F7;
+}
+
+.center #myTabContent2 .tab-pane {
+    width: 1000px;
+    height: 580px;
+}
+
+/* #appoint start */
+.center #myTabContent2 #appoint .open-depart,
+.center #myTabContent2 #appoint .rule {
+    float: left;
+    margin-top: 40px;
+    border: 1px solid #f4f6fa;
+}
+
+.center #myTabContent2 #appoint .open-depart {
+    width: 700px;
+}
+
+.center #myTabContent2 #appoint .open-depart .open-t {
+    padding: 10px 0 0 20px;
+    height: 40px;
+    background-color: #F7F7F7;
+}
+
+.center #myTabContent2 #appoint .open-depart .open-t span {
+    font-size: 16px;
+}
+
+#appoint .open-depart .depList {
+    width: 698px;
+    height: 248px;
+}
+
+#appoint .open-depart .depList div {
+    float: left;
+    padding-top: 10px;
+    width: 146px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #9CC4E8;
+}
+
+#appoint .open-depart .depList ul {
+    float: left;
+    margin-bottom: 3px;
+    width: 552px;
+    font-weight: normal;
+    background-color: #DFF2FC;
+}
+
+#appoint .open-depart .depList ul li {
+    float: left;
+    padding: 10px 8px;
+    text-align: left;
+    width: 184px;
+    height: 40px;
+}
+
+#appoint .open-depart .depList ul li a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#appoint .rule {
+    margin-left: 26px;
+    width: 274px;
+    height: 280px;
+}
+
+#appoint .rule .rule-t {
+    padding: 10px 0 0 8px;
+    width: 272px;
+    height: 40px;
+    background-color: #F7F7F7;
+}
+
+#appoint .rule .rule-t span:nth-child(1) {
+    font-size: 15px;
+}
+
+#appoint .rule .rule-t span:nth-child(2) {
+    font-size: 13px;
+    color: #00B3EA;
+}
+
+#appoint .rule-b {
+    padding: 14px 0 0 8px;
+    width: 272px;
+}
+
+#appoint .rule-b p {
+    margin-top: -4px;
+    font-size: 12px;
+}
+
+/* #appoint end */
+
+/* #info start */
+#myTabContent2 .introduce {
+    margin-top: 30px;
+    width: 1000px;
+    height: 360px;
+}
+
+#myTabContent2 .introduce .intr-h {
+    width: 138px;
+    height: 30px;
+    background-color: #60BFF2;
+}
+
+#myTabContent2 .introduce .intr-h p {
+    line-height: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: #FFF;
+}
+
+#myTabContent2 .introduce .intr-content {
+    padding: 20px 40px;
+    height: 500px;
+    overflow: hidden;
+    border-top: 1px solid #DCDDDD;
+}
+
+#myTabContent2 #info .introduce .intr-content p {
+    font-size: 15px;
+}
+
+/* info end */
+
+/* notice start */
+#myTabContent2 .introduce .intr-content h4 {
+    margin-left: 350px;
+    font-weight: bold;
+}
+
+#myTabContent2 #notice .introduce .intr-content p {
+    font-size: 12px;
+}
+
+/* notice end */
+
+/* tz start */
+#myTabContent2 #tz table {
+    margin: auto;
+    margin-top: 40px;
+    width: 800px;
+}
+
+#myTabContent2 #tz table td {
+    height: 30px;
+    border: 1px solid;
+    text-align: center;
+}
+
+/* tz end */

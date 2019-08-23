@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GroupMapper">
+
+    <resultMap id="groupUserInfo" type="com.vo.GroupUserInfo">
+        <result column="userId" property="userId" javaType="Integer"></result>
+        <result column="groupCard" property="groupCard" javaType="String"></result>
+        <result column="headUrl" property="headUrl" javaType="String"></result>
+        <result column="remark" property="remark" javaType="String"></result>
+    </resultMap>
+
+    <select id="getGroupUserInfo" parameterType="map" resultMap="groupUserInfo">
+        SELECT
+            gu.user_id userId,
+            gu.group_card groupCard,
+            u.head_url headUrl,
+            ( SELECT uf.remark FROM user_friend uf WHERE uf.friend_id = gu.user_id AND uf.user_id = #{userId} ) remark
+        FROM
+            group_user gu,
+            `user` u
+        WHERE
+            gu.group_id = #{groupId}
+            AND gu.user_id = u.id
+            AND gu.apply_status = 1
+    </select>
+
+    <select id="getGroupIdByNumber" parameterType="String" resultType="Integer">
+        SELECT
+            g.id
+        FROM
+            groupp g
+        WHERE
+            g.group_number = #{groupNumber}
+    </select>
+
+</mapper>

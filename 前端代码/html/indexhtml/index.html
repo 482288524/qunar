@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>xx市预约挂号统一平台</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/index.css" type="text/css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <script src="../../js/cookie.js"></script>
+</head>
+
+<body>
+    <!-- login Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="login">登录</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="form-group">
+                            <label for="phoneNumber">手机号</label>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                                placeholder="PhoneNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password">
+                            <button type="button" class="btn btn-primary" onclick="login()">登录</button>
+                            <div class="forget-pas"><a href="#">忘记密码</a></div>
+                        </div>
+                        <div class="form-check"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login Modal end-->
+    <div>
+        <div id="top">
+            <div class="top-t">
+                <div class="top-t-center">
+                    <div>
+                        <img src="../../images/dh.png">
+                        <span class="dhyy">010-114/116114电话预约</span>
+                    </div>
+                    <div>
+                        <span id="welcome">欢迎来到xx市预约挂号统一平台&nbsp;</span>
+                        <a class="a1" id="loginBtn" data-toggle="modal" data-target="#exampleModal">登录</a>
+                        <a class="a1" id="loginS" onclick="rgJump2()"></a>
+                        <a class="a2" id="registBtn" onclick="rgJump()">注册</a>
+                        <a class="a2" id="exit"></a>
+                        <a href="#">帮助中心</a>
+                    </div>
+                </div>
+            </div>
+            <div class="top-b">
+                <div>
+                    <img src="../../images/logo.jpg" width="93" height="75">
+                    <h2>XX市预约挂号统一平台</h2>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">医院
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">科室</a></li>
+                        <li><a href="#">疾病</a></li>
+                        <li><a href="#">医院</a></li>
+                </div>
+                <input type="text" placeholder="请输入搜索内容">
+                <div class="sousuo">
+                    <img src="../../images/sousuo.png" width="40" height="34">
+                </div>
+            </div>
+        </div>
+        <div id="center">
+            <div class="nav">
+                <div class="nav-c">
+                    <div class="nav-c-list">
+                        <a href="#">全部科室</a>
+                        <ul class="list-ul">
+                            <li>
+                                <i class="list-img list1"></i>
+                                <span>内科</span>
+                                <a href="#">胃炎</a>
+                                <a href="#">高血压</a>
+                                <a href="#">冠心病</a>
+                                <div class="xxnr nk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list2"></i>
+                                <span>外科</span>
+                                <a href="#">肾结石</a>
+                                <a href="#">脑外伤</a>
+                                <div class="xxnr wk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list3"></i>
+                                <span>妇产科</span>
+                                <a href="#">阴道炎</a>
+                                <a href="#">不孕不育</a>
+                                <div class="xxnr fck"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list4"></i>
+                                <span>儿科</span>
+                                <a href="#">抽动症</a>
+                                <a href="#">小儿感冒</a>
+                                <div class="xxnr ek"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list5"></i>
+                                <span>骨外科</span>
+                                <a href="#">腰间盘突出</a>
+                                <a href="#">骨折</a>
+                                <div class="xxnr gwk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list6"></i>
+                                <span>眼科</span>
+                                <a href="#">眼底病</a>
+                                <a href="#">近视</a>
+                                <a href="#">白内障</a>
+                                <div class="xxnr yk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list7"></i>
+                                <span>口腔科</span>
+                                <a href="#">牙周炎</a>
+                                <a href="#">牙痛</a>
+                                <div class="xxnr kqk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list8"></i>
+                                <span>耳鼻咽喉头颈科</span>
+                                <a href="#">鼻炎</a>
+                                <div class="xxnr ebyhk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list9"></i>
+                                <span>肿瘤科</span>
+                                <a href="#">癌痛</a>
+                                <div class="xxnr zlk"></div>
+                            </li>
+                            <li>
+                                <i class="list-img list10"></i>
+                                <span>皮肤性病科</span>
+                                <a href="#">皮肤过敏</a>
+                                <div class="xxnr pfk"></div>
+                            </li>
+                            <li class="qtks">
+                                <i class="list-img list11"></i>
+                                <span>其他科室</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="nav-ul">
+                        <li><a onclick="ayygh()">按医院挂号</a></li>
+                        <li><a href="#aksgh">按科室挂号</a></li>
+                        <li><a href="#ajbgh">按疾病挂号</a></li>
+                        <li><a href="#zxgg">最新公告</a></li>
+                    </ul>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- 轮播（Carousel）指标 -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="../../images/lunbo1.png" alt="First slide">
+                            </div>
+                            <div class="item">
+                                <img src="../../images/lunbo2.jpg" alt="Second slide">
+                            </div>
+                            <div class="item">
+                                <img src="../../images/lunbo3.png" alt="Third slide">
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="carousel-r">
+                        <div class="carousel-r-t">
+                            <div class="ksyy">
+                                <span>快速预约</span>
+                            </div>
+                            <select name="area" id="area" onchange="getLevel()">
+                                <option value="0">医院地区</option>
+                                <option value="东城区">东城区</option>
+                                <option value="西城区">西城区</option>
+                                <option value="朝阳区">朝阳区</option>
+                                <option value="丰台区">丰台区</option>
+                                <option value="石景山区">石景山区</option>
+                                <option value="海淀区">海淀区</option>
+                            </select>
+                            <select name="level" id="level" onchange="getHospitalName()">
+                                <option value="0">医院等级</option>
+                                <!-- <option value="2">三等医院</option>
+                                <option value="3">二等医院</option>
+                                <option value="4">一等医院</option> -->
+                            </select>
+                            <select name="hospitalName" onchange="getDepartment()">
+                                <option value="0">医院名称</option>
+                                <!-- <option value="2">协和医院</option>
+                                <option value="3">人民医院</option>
+                                <option value="4">第三医院</option> -->
+                            </select>
+                            <select name="department">
+                                <option value="0">医院科室</option>
+                                <option value="1">血液科门诊</option>
+                                <option value="2">呼吸内科门诊</option>
+                                <option value="3">消化内科门诊</option>
+                                <option value="4">急诊科</option>
+                                <option value="5">儿科门诊</option>
+                            </select>
+                            <button type="submit">快速查询</button>
+                        </div>
+                        <div class="carousel-r-c">
+                            <div class="bzzx">
+                                <span>帮助中心</span>
+                            </div>
+                        </div>
+                        <div class="carousel-r-b">
+                            <div>账号指南</div>
+                            <div>预约指南</div>
+                            <div>账号申诉</div>
+                            <div>常见问题</div>
+                        </div>
+                    </div>
+                    <div class="nav-bottom">
+                        <div class="nav-bottom-l">
+                            <!-- 选项卡菜单-->
+                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#all" role="tab" data-toggle="tab">全部</a>
+                                <li><a href="#east" role="tab" data-toggle="tab">东城区</a>
+                                <li><a href="#weast" role="tab" data-toggle="tab">西城区</a>
+                                <li><a href="#cyq" role="tab" data-toggle="tab">朝阳区</a>
+                                <li><a href="#ftq" role="tab" data-toggle="tab">丰台区</a>
+                                <li><a href="#sjsq" role="tab" data-toggle="tab">石景山区</a>
+                            </ul>
+                            <!-- 选项卡面板 -->
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane active" id="all">
+                                    <div class="hos">
+                                        <div class="hospital">
+                                            <img src="../../images/hos_1.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">协和医院</a>
+                                                <p>电话：医院总机查号台：69156114</p>
+                                                <p>地址：[东院]北京市东城区帅府园一号[西院]北京市西城区大木仓...</p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_2.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">中国人民解放军医院</a>
+                                                <p>电话：010-66887329</p>
+                                                <p>地址：北京市海淀区复兴路28号</p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_3.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">北京大学第一医院</a>
+                                                <p>电话：010-83572211、010-6...</p>
+                                                <p>
+                                                    <p>地址：北京市西城区西什库大街八号</p>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_4.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">北京大学人民医院</a>
+                                                <p>电话：010-88325141,010-8...</p>
+                                                <p>地址：北京市西城区西直门南大街11号</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="hos-ul">
+                                        <li>
+                                            <a href="#">北京大学第三医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">中国医学科学院肿瘤医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">中国医学科学院阜外医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">首都医科大学附属北京天坛医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">首都医科大学附属北京安贞医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">首都医科大学宣武医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                    </ul>
+                                    <a href="#">更多医院</a>
+                                </div>
+                                <div class="tab-pane" id="east">
+                                    <div class="hos">
+                                        <div class="hospital">
+                                            <img src="../../images/hos_5.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">XX医院</a>
+                                                <p>电话：医院总机查号台：69156114</p>
+                                                <p>地址：[东院]北京市东城区帅府园一号[西院]北京市西城区大木仓...</p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_6.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">中国人民解放军医院</a>
+                                                <p>电话：010-66887329</p>
+                                                <p>地址：北京市海淀区复兴路28号</p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_7.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">xx大学第一医院</a>
+                                                <p>电话：010-83572211、010-6...</p>
+                                                <p>
+                                                    <p>地址：xx市西城区西什库大街八号</p>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="hospital">
+                                            <img src="../../images/hos_8.jpg" width="200" height="150">
+                                            <div class="hospital-r">
+                                                <a href="#">xx大学人民医院</a>
+                                                <p>电话：010-88325141,010-8...</p>
+                                                <p>地址：xx市西城区西直门南大街11号</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="hos-ul">
+                                        <li>
+                                            <a href="#">xx大学第三医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">中国医学科学院肿瘤医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">中国医学科学院阜外医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">xx医科大学附属北京天坛医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">xx医科大学附属北京安贞医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">xx医科大学宣武医院</a>
+                                            <span>【三级甲等】</span>
+                                        </li>
+                                    </ul>
+                                    <a href="#">更多医院</a>
+                                </div>
+                                <div class="tab-pane" id="weast">西城区</div>
+                                <div class="tab-pane" id="cyq">朝阳区</div>
+                                <div class="tab-pane" id="ftq">丰台区</div>
+                                <div class="tab-pane" id="sjsq">石景山区</div>
+                            </div>
+                        </div>
+                        <div class="nav-bottom-r">
+                            <div class="nav-bottom-r-t">
+                                <div class="gg zxgg">
+                                    <span class="zxgg-ys">最新公告</span>
+                                    <a href="#">更多</a>
+                                    <ul>
+                                        <li><a href="#">域名更换公告</a></li>
+                                        <li><a href="#">实名认证服务调整公告</a></li>
+                                        <li><a href="#">中日友好医院网络升级公告</a></li>
+                                        <li><a href="#">应急总医院(原煤炭总医院)变更...</a></li>
+                                        <li><a href="#">清华大学医院寒假暂停更新号源通...</a></li>
+                                        <li><a href="#">北京肿瘤医院部分科室医生门诊医...</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nav-bottom-r-b">
+                                <div class="gg tzgg">
+                                    <span class="tzgg-ys">停诊公告</span>
+                                    <a href="#">更多</a>
+                                    <ul>
+                                        <li><a href="#">北京大学第四临床医学院北京积水...</a></li>
+                                        <li><a href="#">北京大学第四临床医学院北京积水...</a></li>
+                                        <li><a href="#">北京大学第一医院中医中西医结合...</a></li>
+                                        <li><a href="#">北京大学第一医院中医中西医结合...</a></li>
+                                        <li><a href="#">北京大学第一医院临床营养科停诊...</a></li>
+                                        <li><a href="#">北京市大兴区人民医院皮科停诊公...</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#footer").load("./footer.html");
+            if (isExistKey('userId') == 1) {
+                document.getElementById("loginBtn").style.display = "none";
+                document.getElementById("registBtn").style.display = "none";
+                document.getElementById("loginS").style.display = "block";
+                document.getElementById("exit").style.display = "block";
+                document.getElementById("welcome").innerHTML = "欢迎您," + getRealName();
+                document.getElementById("loginS").innerHTML = "个人中心";
+                document.getElementById("exit").innerHTML = "退出";
+            }
+        });
+
+        function rgJump() {
+            window.location.href = "./regist.html";
+        }
+
+        function login() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/selectUser",
+                dataType: "json",
+                data: $("#form").serialize(),
+                success: function (data) {
+                    if (data.userList != '' && data.userList != null) {
+                        alert("登录成功!");
+                        $('#exampleModal').modal('hide');
+                        setValue('userId', data.userList[0].userId);
+                        setValue('realName', data.userList[0].realName);
+                        document.getElementById("loginBtn").style.display = "none";
+                        document.getElementById("registBtn").style.display = "none";
+                        document.getElementById("loginS").style.display = "block";
+                        document.getElementById("exit").style.display = "block";
+                        document.getElementById("welcome").innerHTML = "欢迎您," + data.userList[0].realName;
+                        document.getElementById("loginS").innerHTML = "个人中心";
+                        document.getElementById("exit").innerHTML = "退出";
+                    } else {
+                        alert("用户名或密码错误!")
+                    }
+                }
+            });
+        }
+
+        function rgJump2() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/selectUserRole?" + "userId=" + getUserId(),
+                dataType: "json",
+                data: $("#form").serialize(),
+                success: function (data) {
+                    //alert(data.userRoleList[0]);
+                    if (data.userRoleList[0].roleId == 1) {
+                        window.location.href = "../adminhtml/admin.html?";
+                    } else if (data.userRoleList[0].roleId == 2) {
+                        window.location.href = "../doctorhtml/doctor.html?realName=" + getRealName();
+                    } else {
+                        window.location.href = "../userhtml/user.html?realName=" + getRealName();
+                    }
+                }
+            });
+        }
+
+
+        $("#exit").on("click", function () {  //将退出按钮的id设置为exit
+            var conf = confirm("您确定要退出吗?");
+            if (conf == true) {
+                //sessionStorage.clear()
+                dKey('userId');
+                window.location.reload()
+            }
+        })
+
+        function ayygh() {
+            window.location.href = "../indexhtml/ayygh.html";
+        }
+
+        let level = [
+            ['三等医院', '二等医院', '一等医院'], ['三等医院', '二等医院', '一等医院'], ['三等医院', '二等医院', '一等医院'],
+            ['三等医院', '二等医院', '一等医院'], ['三等医院', '二等医院', '一等医院'], ['三等医院', '二等医院', '一等医院']
+        ];
+        let hospitalName = [
+            [
+                ['协和医院', '同仁医院', '卫生部医院', '医科大学附属医院', '中医院大学东直门医院', '和平里医院'],
+                ['密云县医院', '第六医院', '普仁医院', '隆福医院', '鼓楼中医医院', '东城区第二保健院'],
+                ['惠民中医儿童医院', '东城区一级医院']
+            ],
+            [
+                ['第一医院', '人民医院', '宣武医院', '305医院', '回民医院', '肛肠医院'],
+                ['第二医院', '健宫医院', '西城区展览路医院'],
+                ['西城区德胜社区卫生服务中心', '西城区一级医院']
+            ],
+            [
+                ['科学院肿瘤医院', '中日友好医院', '垂杨柳医院', '民航总医院', '306医院', '航空总医院'],
+                ['朝阳区中医医院', '朝阳区双桥医院', '机场医院', '朝阳区妇幼保健院'],
+                ['朝阳区一级医院'],
+            ],
+            [
+                ['东方医院', '电力医院', '航天总医院', '博爱医院', '302医院', '307医院'],
+                ['丰台医院(桥南部)', '丰台医院(桥北部)', '丰台区南苑医院', '丰台区铁营医院'],
+                ['丰台区区一级医院'],
+            ],
+            [
+                ['中国医学科学院整形外科医院', '中国中医科学院眼科医院', '朝阳医院西区(石景山)', '北京大学首钢医院'],
+                ['清华大学玉泉医院', '北京市石景山医院', '北京市石景山区中医医院'],
+                ['石景山区一级医院'],
+            ],
+            [
+                ['北京大学第三医院', '北京肿瘤医院', '空军总医院', '北京老年医院', '北京大学第六医院', '北京大学口腔医院（魏公村总院)'],
+                ['北京大学医院', '北京市中关村医院', '清华大学医院', '北京市上地医院', '北京水利医院', '北京四季青医院'],
+                ['海淀区一级医院'],
+            ]
+        ];
+
+        function getLevel() {
+            //获得地区下拉框的对象
+            let sltArea = document.getElementsByName("area")[0];
+            //获得等级下拉框的对象
+            let sltLevel = document.getElementsByName("level")[0];
+            //获得医院名称下拉框的对象
+            let sltHospitalName = document.getElementsByName("hospitalName")[0];
+            //得到地区对应的等级数组
+            let areaLevel = level[sltArea.selectedIndex - 1];
+            //清空等级下拉框，仅留提示选项
+            sltLevel.length = 1;
+            sltHospitalName.length = 1;
+            //将等级数组中的值填充到等级下拉框中
+            for (let i = 0; i < areaLevel.length; i++) {
+                sltLevel[i + 1] = new Option(areaLevel[i], areaLevel[i]);
+            }
+        }
+
+        function getHospitalName() {
+            //获得地区下拉框的对象
+            let sltArea = document.getElementsByName("area")[0];
+            //获得等级下拉框的对象
+            let sltLevel = document.getElementsByName("level")[0];
+            //获得医院名称下拉框的对象
+            let sltHospitalName = document.getElementsByName("hospitalName")[0];
+            //得到等级对应的医院名称数组
+            console.log(hospitalName[sltArea.selectedIndex - 1][sltLevel.selectedIndex - 1])
+            let levelHospitalName = hospitalName[sltArea.selectedIndex - 1][sltLevel.selectedIndex - 1];
+            //清空医院名称下拉框，仅留提示选项
+            sltHospitalName.length = 1;
+            //将医院名称数组中的值填充到医院名称下拉框中
+            for (var i = 0; i < levelHospitalName.length; i++) {
+                sltHospitalName[i + 1] = new Option(levelHospitalName[i], levelHospitalName[i]);
+            }
+        }
+    </script>
+</body>
+
+</html>

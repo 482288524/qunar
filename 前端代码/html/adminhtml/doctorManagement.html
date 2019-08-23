@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>医生管理</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../../css/adminCenterRight.css" type="text/css">
+</head>
+
+<body>
+    <div class="modal" tabindex="-1" role="dialog" id="myModal3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel3">
+                        添加信息
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form4">
+                        <table>
+                            <tr>
+                                <td>工号:</td>
+                                <td><input id="jobNo" name="jobNo" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>姓名:</td>
+                                <td><input id="realName2" name="realName" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱:</td>
+                                <td><input id="email" name="email" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>电话号码:</td>
+                                <td><input id="phoneNumber" name="phoneNumber" type="text"></td>
+                            </tr>
+                            <!-- <tr>
+                                        <td>密码:</td>
+                                        <td><input id="password" name="password" type="text"></td>
+                                    </tr> -->
+                            <tr>
+                                <td>科室编号:</td>
+                                <td><input id="departmentId" name="departmentId" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>职务:</td>
+                                <td><input id="post" name="post" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>职称:</td>
+                                <td><input id="title" name="title" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>性别:</td>
+                                <td class="sex">
+                                    <input type="radio" name="sex" id="sex1" value="男" class="required:true">男
+                                    <input type="radio" name="sex" id="sex2" value="女">女
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>备注:</td>
+                                <td><input id="memo" name="memo" type="text"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="add2()" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal4">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel4">
+                        修改信息
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form5">
+                        <table>
+                            <input id="doctorId2T" name="doctorId" type="text" hidden>
+                            <tr>
+                                <td>工号:</td>
+                                <td><input id="jobNo2T" name="jobNo" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>姓名:</td>
+                                <td><input id="realName2T" name="realName" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱:</td>
+                                <td><input id="email2T" name="email" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>电话号码:</td>
+                                <td><input id="phoneNumber2T" name="phoneNumber" type="text"></td>
+                            </tr>
+                            <!-- <tr>
+                                        <td>密码:</td>
+                                        <td><input id="passwordT" name="password" type="text"></td>
+                                    </tr> -->
+                            <tr>
+                                <td>科室编号:</td>
+                                <td><input id="departmentId2T" name="departmentId" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>职务:</td>
+                                <td><input id="post2T" name="post" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>职称:</td>
+                                <td><input id="title2T" name="title" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>性别:</td>
+                                <td class="sex">
+                                    <input type="radio" name="sex" id="sex1T2" value="1" class="required:true">男
+                                    <input type="radio" name="sex" id="sex2T2" value="2">女
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>备注:</td>
+                                <td><input id="memo2T" name="memo" type="text"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="update2()" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="xxk table-responsive hide" id="ysgl">
+        <div class="right-t">
+            <h4>医生管理</h4>
+        </div>
+        <div class="right-b">
+            <div class="sousuo2">
+                <form id="form3">
+                    <input type="text" name="jobNo" class="selectInput" placeholder="按医生工号搜索">
+                    <div class="selectDiv" onclick="b()"></div>
+                    <input type="text" name="realName" class="selectInput" placeholder="按姓名搜索">
+                    <div class="selectDiv" onclick="b()"></div>
+                    <input type="text" name="phoneNumber" class="selectInput" placeholder="按手机号码搜索">
+                    <div class="selectDiv" onclick="b()"></div>
+                </form>
+            </div>
+            <button class="add" data-toggle="modal" data-target="#myModal3">
+                增加
+            </button>
+            <table id="table2" class="table">
+                <tr>
+                    <th>医生编号</th>
+                    <th>工号</th>
+                    <th>姓名</th>
+                    <th>邮箱</th>
+                    <th>电话号码</th>
+                    <th>科室编号</th>
+                    <th>职务</th>
+                    <th>职称</th>
+                    <th>性别</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let doctorList;
+        function b() {
+            let len = document.getElementById("table2").rows.length;
+            for (i = len - 1; i > 0; i--) {
+                document.getElementById("table2").deleteRow(i);
+            }
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/selectDoctor",
+                data: $("#form3").serialize(),
+                dataType: "json",
+                success: function (data) {
+                    doctorList = data.doctorList;
+                    for (i in data.doctorList) {
+                        let tr = "<td>" + data.doctorList[i].doctorId + "</td>" + "<td>" + data.doctorList[i].jobNo + "</td>" +
+                            "<td>" + data.doctorList[i].realName + "</td>" + "<td>" + data.doctorList[i].email + "</td>" +
+                            "<td>" + data.doctorList[i].phoneNumber + "</td>" + "<td>" + data.doctorList[i].departmentId + "</td>" + "<td>" + data.doctorList[i].post + "</td>" +
+                            "<td>" + data.doctorList[i].title + "</td>" + "<td>" + data.doctorList[i].sex + "</td>" +
+                            "<td>" + data.doctorList[i].memo + "</td>" +
+                            "<td><button data-toggle='modal' data-target='#myModal4' onclick='edit2(" + i + ")'>修改</button>" +
+                            "<button onclick='del2(" + doctorList[i].doctorId + ")'>删除</button></td>";
+                        $("#table2").append("<tr id=" + doctorList[i].doctortId + ">" + tr + "</tr>");
+                    }
+                }
+            });
+        }
+        b();
+
+        function add2() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/insertDoctor",
+                dataType: "json",
+                data: $("#form4").serialize(),
+                success: function (data) {
+                    location.reload();
+                }
+            });
+            alert("添加成功！");
+        }
+
+        function del2(id) {
+            let message = confirm("是否确认删除?");
+            if (message == true) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/deleteDoctor?doctorId=" + id,
+                    dataType: "json",
+                    success: function (data) {
+                        document.getElementById(id).style.display = 'none';
+                    }
+                });
+                alert("删除成功!");
+            } else {
+                alert("操作取消!");
+            }
+        }
+
+        function edit2(i) {
+            document.getElementById("doctorId2T").value = doctorList[i].doctorId;
+            document.getElementById("jobNo2T").value = doctorList[i].jobNo;
+            document.getElementById("realName2T").value = doctorList[i].realName;
+            document.getElementById("email2T").value = doctorList[i].email;
+            document.getElementById("phoneNumber2T").value = doctorList[i].phoneNumber;
+            document.getElementById("departmentId2T").value = doctorList[i].departmentId;
+            document.getElementById("post2T").value = doctorList[i].post;
+            document.getElementById("title2T").value = doctorList[i].title;
+            if (doctorList[i].sex == '男') {
+                document.getElementById("sex1T2").checked = true;
+            } else {
+                document.getElementById("sex2T2").checked = true;
+            }
+            document.getElementById("memo2T").value = doctorList[i].memo;
+
+        }
+
+        function update2() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/updateDoctor",
+                dataType: "json",
+                data: $("#form5").serialize(),
+                success: function (data) {
+                    location.reload();
+                }
+            });
+            alert("修改成功！")
+        }
+    </script>
+</body>
+
+</html>

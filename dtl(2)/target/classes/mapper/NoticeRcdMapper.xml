@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.NoticeRcdMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.NoticeRcd">
+        <id column="notice_id" jdbcType="BIGINT" property="noticeId"/>
+        <result column="queue_id" jdbcType="BIGINT" property="queueId"/>
+        <result column="msg_tm" jdbcType="TIMESTAMP" property="msgTm"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+
+    <select id="getNoticeRcd" parameterType="noticeRcd" resultMap="BaseResultMap">
+        select * from t_notice_rcd n
+        where 1=1
+        <if test="noticeRcd.queueId != null and noticeRcd.queueId != ''">
+            AND n.queue_id like '%${noticeRcd.queueId}%'
+        </if>
+        <if test="noticeRcd.msgTm != null and noticeRcd.msgTm != ''">
+            AND n.msg_tm = #{noticeRcd.msgTm}
+        </if>
+        <if test="noticeRcd.content != null and noticeRcd.content != ''">
+            AND n.content like '%${noticeRcd.content}%'
+        </if>
+        <if test="noticeRcd.type != null and noticeRcd.type != ''">
+        AND n.type = #{noticeRcd.type}
+    </if>
+    </select>
+
+</mapper>

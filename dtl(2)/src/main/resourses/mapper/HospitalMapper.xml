@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.HospitalMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.Hospital">
+        <id column="hospital_id" jdbcType="BIGINT" property="hospitalId"/>
+        <result column="hospital_name" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="level" jdbcType="VARCHAR" property="level"/>
+        <result column="department" jdbcType="VARCHAR" property="department"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="classify" jdbcType="VARCHAR" property="classify"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="route" jdbcType="VARCHAR" property="route"/>
+    </resultMap>
+
+    <select id="getHospital" parameterType="hospital" resultMap="BaseResultMap">
+        select * from t_hospital h
+        where 1=1
+        <if test="hospital.hospitalId != null and hospital.hospitalId != ''">
+            AND h.hospital_id = #{hospital.hospitalId}
+        </if>
+        <if test="hospital.hospitalName != null and hospital.hospitalName != ''">
+            AND h.hospital_name like '%${hospital.hospital_name}%'
+        </if>
+        <if test="hospital.area != null and hospital.area != ''">
+            AND h.area like '%${hospital.area}%'
+        </if>
+        <if test="hospital.level != null and hospital.level != ''">
+            AND h.level like '%${hospital.level}%'
+        </if>
+        <if test="hospital.department != null and hospital.department != ''">
+            AND h.department like '%${hospital.department}%'
+        </if>
+        order by h.hospital_id
+    </select>
+
+</mapper>

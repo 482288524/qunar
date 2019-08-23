@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DoctorMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.Doctor">
+        <id column="doctor_id" jdbcType="INTEGER" property="doctorId"/>
+        <result column="job_no" jdbcType="VARCHAR" property="jobNo"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+<!--        <result column="password" jdbcType="VARCHAR" property="password"/>-->
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="post" jdbcType="VARCHAR" property="post"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+    </resultMap>
+
+    <select id="getDoctor" parameterType="doctor" resultMap="BaseResultMap">
+        select * from t_doctor d
+        where 1=1
+        <if test="doctor.doctorId != null and doctor.doctorId != ''">
+            AND d.doctor_id = #{doctor.doctorId}
+        </if>
+        <if test="doctor.jobNo != null and doctor.jobNo != ''">
+            AND d.job_no like '%${doctor.jobNo}%'
+        </if>
+        <if test="doctor.realName != null and doctor.realName != ''">
+            AND d.real_name like '%${doctor.realName}%'
+        </if>
+        <if test="doctor.phoneNumber != null and doctor.phoneNumber != ''">
+            AND d.phone_number = #{doctor.phoneNumber}
+        </if>
+        <if test="doctor.post != null and doctor.post != ''">
+            AND d.post like '%${doctor.post}%'
+        </if>
+        <if test="doctor.title != null and doctor.title != ''">
+            AND d.title like '%${doctor.title}%'
+        </if>
+
+        <if test="doctor.departmentId != null and doctor.departmentId != ''">
+            AND d.department_id = #{doctor.departmentId}
+        </if>
+    </select>
+
+</mapper>

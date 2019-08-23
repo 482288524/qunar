@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RegistrationPoolMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.RegistrationPool">
+        <id column="pool_id" jdbcType="BIGINT" property="poolId"/>
+        <result column="business_id" jdbcType="VARCHAR" property="businessId"/>
+        <result column="pool_dt" jdbcType="TIMESTAMP" property="poolDt"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+    </resultMap>
+
+    <select id="getRegistrationPool" parameterType="registrationPool" resultMap="BaseResultMap">
+        select * from t_registration_pool rp
+        where 1=1
+        <if test="registrationPool.businessId != null and registrationPool.businessId != ''">
+            AND rp.business_id = #{registrationPool.businessId}
+        </if>
+        <if test="registrationPool.poolDt != null and registrationPool.poolDt != ''">
+            AND rp.pool_dt = #{registrationPool.poolDt }
+        </if>
+        order by rp.pool_dt
+    </select>
+
+
+</mapper>

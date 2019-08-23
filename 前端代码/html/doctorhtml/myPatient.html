@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>我的病人</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../../css/adminCenterRight.css" type="text/css">
+    <style>
+        .xxk .sousuo2 .selectInput {
+            margin-bottom: 20px;
+        }
+
+        .xxk .sousuo2 .selectInput:nth-child(1) {
+            margin-left: 60px;
+        }
+
+        #table1 tr td button {
+            width: 50px;
+            height: 24px;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            color: #FFF;
+            background-color: #2DA5E1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="xxk table-responsive" id="myPatient">
+        <div class="right-t">
+            <h4>我的病人</h4>
+        </div>
+        <div class="right-b">
+            <div class="sousuo2">
+                <form id="form0">
+                    <input type="text" name="patientId" class="selectInput" placeholder="按患者编号搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="realName" class="selectInput" placeholder="按姓名搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="phoneNumber" class="selectInput" placeholder="按手机号码搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                </form>
+            </div>
+            <table id="table1" class="table">
+                <tr>
+                    <th>患者编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>卡类型</th>
+                    <th>卡号</th>
+                    <th>身份证号</th>
+                    <th>手机号码</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        let patientList;
+
+        function a() {
+            // let len = document.getElementById("table1").rows.length;
+            // for (let j = len - 1; j > 0; j--) {
+            //     document.getElementById("table1").deleteRow(j);
+            // }
+            console.log(getRealName())
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/selectPatient?doctorName=" + getRealName(),
+                data: $("#form0").serialize(),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data)
+                    patientList = data.patientList;
+                    for (let i in patientList) {
+                        let tr = "<td>" + patientList[i].patientId + "</td>" + "<td>" + patientList[i].realName + "</td>" +
+                            "<td>" + patientList[i].sex + "</td>" +
+                            "<td>" + patientList[i].cardType + "</td>" + "<td>" + patientList[i].cardNo + "</td>" +
+                            "<td>" + patientList[i].idCardNo + "</td>" +
+                            "<td>" + patientList[i].phoneNumber + "</td>" + `<td id='${i}'>${patientList[i].status}</td>` +
+                            `<td><button onclick='jz(${patientList[i].patientId})'>就诊</button></td>`;
+                        $("#table1").append("<tr id=" + patientList[i].patientId + ">" + tr + "</tr>");
+                        if ($(`#${i}`).text() == '已就诊') {
+                            $(`#${i}`).css('color', 'red');
+                            $(`#${patientList[i].patientId}`).find('button').attr('disabled', true);
+                            $(`#${patientList[i].patientId}`).find('button').css('background-color', '#ccc');
+                        }
+                    }
+                }
+            });
+        };
+        a();
+
+        function jz(id) {
+            let msg = confirm('是否为该患者就诊?');
+            if (msg == true) {
+                // $('#' + tdId)[0].value = '已就诊';
+                // $('#' + tdId).css('color', 'red');
+                // $('#' + id).find('button').attr('disabled', true);
+                // $('#' + id).find('button').css('background-color', '#ccc');
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/updatePatientStatus?patientId=" + id,
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.info)
+                        location.reload();
+                    }
+                });
+            }
+
+        }
+
+        window.onload = function () {
+            // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+            let trList = document.getElementsByTagName("tr");
+            for (let i = 0; i < trList.length; i++) {
+                changeColor(trList[i]);
+            }
+        }
+
+        function changeColor(tr) {
+            tr.onmouseover = function () {
+                tr.style.backgroundColor = "#E0E0E0";
+            }
+            tr.onmouseout = function () {
+                tr.style.backgroundColor = "#fff"
+            }
+        }
+
+    </script>
+</body>
+
+</html>

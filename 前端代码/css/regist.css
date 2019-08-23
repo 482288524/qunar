@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#regist {
+    margin-top: 59px;
+}
+
+#regist .center .rg-new a {
+    color: #FFF;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#regist .center {
+    margin: auto;
+    width: 1000px;
+    height: 400px;
+}
+
+#regist .center .rg-new {
+    margin-top: 16px;
+    margin-bottom: 10px;
+    height: 30px;
+    border-bottom: 2px solid #49a6d8;
+    background: url('../images/rg_new.jpg') no-repeat;
+}
+
+#regist .center .rg-new a {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 4px;
+}
+
+#regist .center .rg-nr {
+    margin-top: 40px;
+    margin-left: 260px;
+    width: 740px;
+    height: 450px;
+}
+
+#regist input[type=text],
+#regist input[type=password],
+select {
+    box-sizing: border-box;
+    padding-left: 4px;
+    width: 260px;
+    height: 28px;
+}
+
+#regist input::-webkit-input-placeholder {
+    color: #BABABA;
+}
+
+#regist input[type=text],
+#regist input[type=password],
+.center .rg-nr td {
+    font-size: 14px;
+}
+
+#regist .center .rg-nr tr {
+    height: 40px;
+}
+
+#regist .center .rg-nr tr td:nth-child(1) {
+    text-align: right;
+}
+
+#regist .center .rg-nr tr td:nth-child(2) {
+    padding-left: 22px;
+}
+
+#sex1 {
+    margin-left: 80px;
+}
+
+#sex2 {
+    margin-left: 40px;
+}
+
+#regist #yzm {
+    width: 200px;
+}
+
+#bt1 {
+    margin-left: 10px;
+    height: 28px;
+}
+
+#bt2 {
+    float: left;
+    outline: none;
+    margin-top: 24px;
+    margin-left: 150px;
+    width: 96px;
+    height: 40px;
+    font-size: 18px;
+    color: #FFF;
+    border-radius: 12px;
+    border: none;
+    background-color: #F7B52C;
+}
+
+.error {
+    color: red;
+}

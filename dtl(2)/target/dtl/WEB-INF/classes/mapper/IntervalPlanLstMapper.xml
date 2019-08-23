@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.IntervalPlanLstMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.IntervalPlanLst">
+        <id column="plan_lst_id" jdbcType="INTEGER" property="planLstId"/>
+        <result column="interval_plan_id" jdbcType="INTEGER" property="intervalPlanId"/>
+        <result column="bgn_tm" jdbcType="VARCHAR" property="bgnTm"/>
+        <result column="end_tm" jdbcType="VARCHAR" property="endTm"/>
+        <result column="registration_num" jdbcType="VARCHAR" property="registrationNum"/>
+    </resultMap>
+
+    <select id="getIntervalPlanLst" parameterType="intervalPlanLst" resultMap="BaseResultMap">
+        select * from t_interval_plan_lst interPlanLst
+        where 1=1
+        <if test="intervalPlanLst.intervalPlanId != null and intervalPlanLst.intervalPlanId != ''">
+            AND interPlanLst.interval_plan_id = #{interPlanLst.intervalPlanId}
+        </if>
+        <if test="intervalPlanLst.bgnTm != null and intervalPlanLst.bgnTm != ''">
+            AND interPlanLst.bgn_tm &gt; #{intervalPlanLst.bgnTm }
+        </if>
+        <if test="intervalPlanLst.endTm != null and intervalPlanLst.endTm != ''">
+            AND interPlanLst.end_tm &lt; #{intervalPlanLst.endTm }
+        </if>
+    </select>
+
+    <select id="findByDepartment" parameterType="Integer" resultMap="BaseResultMap">
+      select * from t_interval_plan_lst t1
+        where t1.interval_plan_id in (select t2.interval_plan_id from t_business_info t2 where t2.department_id = #{id})
+    </select>
+
+    <select id="getDPartAllInterval" parameterType="Integer" resultType="String">
+        SELECT
+            CONCAT(tipl.bgn_tm,'-',tipl.end_tm) time
+        FROM
+            t_business_info tbi,
+            t_interval_plan_lst tipl
+        WHERE
+            tbi.department_id = #{departmentId}
+            AND tbi.interval_plan_id = tipl.interval_plan_id
+        GROUP BY CONCAT(tipl.bgn_tm,'-',tipl.end_tm);
+    </select>
+
+    <select id="getDpMsgAndIntPlanLst" resultType="map">
+        SELECT
+            tipl.plan_lst_id planLstId,
+            tipl.interval_plan_id intervalPlanId,
+            tipl.bgn_tm bgnTm,
+            tipl.end_tm endTm,
+            tipl.registration_num registrationNum,
+            tdi.department_type departmentType,
+            tdi.department_name departmentName,
+            tbi.week_set week
+        FROM
+            t_interval_plan_lst tipl,
+            t_department_info tdi,
+            t_business_info tbi
+        WHERE
+            tbi.interval_plan_id = tipl.interval_plan_id
+            AND tdi.department_id = tbi.department_id
+        order by intervalPlanId
+    </select>
+
+    <select id="getDPartIntervalPlan" parameterType="Integer" resultType="map">
+        SELECT
+            tipl.interval_plan_id interPlanId,
+            tbi.week_set weekSet,
+            CONCAT(tipl.bgn_tm,'-',tipl.end_tm) time,
+            tipl.registration_num registrationNum
+        FROM
+            t_business_info tbi,
+            t_interval_plan_lst tipl
+        WHERE
+            tbi.department_id = #{departmentId}
+            AND tbi.interval_plan_id = tipl.interval_plan_id
+        ORDER BY
+            tbi.week_set;
+    </select>
+
+    <update id="updateNum" parameterType="Integer">
+        UPDATE t_interval_plan_lst tipl set tipl.registration_num = tipl.registration_num - 1
+        WHERE tipl.interval_plan_id = #{id}
+    </update>
+    <update id="updateAddNum" parameterType="Integer">
+        UPDATE t_interval_plan_lst tipl set tipl.registration_num = tipl.registration_num + 1
+        WHERE tipl.interval_plan_id = #{id}
+    </update>
+</mapper>

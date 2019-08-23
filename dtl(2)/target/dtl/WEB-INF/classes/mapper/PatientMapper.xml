@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PatientMapper">
+    <resultMap id="BaseResultMap" type="com.bean.Patient">
+        <id column="patient_id" jdbcType="DECIMAL" property="patientId"/>
+        <result column="interval_plan_id" jdbcType="INTEGER" property="intervalPlanId"/>
+        <result column="doctor_name" jdbcType="VARCHAR" property="doctorName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="id_card_no" jdbcType="VARCHAR" property="idCardNo"/>
+        <result column="card_type" jdbcType="VARCHAR" property="cardType"/>
+        <result column="card_no" jdbcType="VARCHAR" property="cardNo"/>
+        <result column="priority" jdbcType="VARCHAR" property="priority"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="hos_name" jdbcType="VARCHAR" property="hosName"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="dep_name" jdbcType="VARCHAR" property="depName"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+    </resultMap>
+
+    <select id="getPatient" parameterType="patient" resultMap="BaseResultMap">
+        select * from t_patient p
+        where 1=1
+        <if test="patient.patientId != null and patient.patientId != ''">
+            AND p.patient_id = #{patient.patientId}
+        </if>
+        <if test="patient.doctorName != null and patient.doctorName != ''">
+            AND p.doctor_name like '%${patient.doctorName}%'
+        </if>
+        <if test="patient.realName != null and patient.realName != ''">
+            AND p.real_name like '%${patient.realName}%'
+        </if>
+        <if test="patient.cardNo != null and patient.cardNo != ''">
+            AND p.card_no = #{patient.cardNo}
+        </if>
+        <if test="patient.phoneNumber != null and patient.phoneNumber != ''">
+            AND p.phone_number like '%${patient.phoneNumber}%'
+        </if>
+        order by p.patient_id
+    </select>
+    
+    <update id="updatePatientStatus" parameterType="Integer">
+        update t_patient tp set tp.status = '已就诊'
+        where  tp.patient_id = #{patientId}
+    </update>
+
+</mapper>

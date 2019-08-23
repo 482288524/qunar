@@ -1,0 +1,116 @@
+/* 样式初始化 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+/* bottom start */
+#bottom {
+    margin-top: 40px;
+    background-color: #ECEEF2;
+}
+
+#bottom .bottom-c {
+    padding-top: 50px;
+    width: 1000px;
+    height: 182px;
+    margin: auto;
+}
+
+#bottom .bottom-c .bottom-c-l {
+    text-align: center;
+    width: 353px;
+    height: 120px;
+}
+
+#bottom .bottom-c .bottom-c-l img {
+    margin-left: 40px;
+}
+
+#bottom .bottom-c .bottom-c-l,
+.bottom-c-l img,
+.bottom-c-l span,
+#bottom .bottom-c-c,
+.bottom-c-c ul li,
+#bottom .ewm {
+    float: left;
+}
+
+#bottom .bottom-c .bottom-c-l span {
+    margin-top: 45px;
+    margin-left: 10px;
+    font-size: 17px;
+}
+
+#bottom .bottom-c .bottom-c-c {
+    margin-left: 59px;
+    margin-top: 3px;
+    width: 324px;
+    height: 110px;
+    background: url('../images/bottom_hr.jpg') 30px 64px no-repeat;
+}
+
+#bottom .bottom-c .bottom-c-c ul {
+    margin-bottom: 0;
+    width: 324px;
+    height: 60px;
+}
+
+#bottom .bottom-c .bottom-c-c ul li {
+    margin-left: 55px;
+    line-height: 29px;
+}
+
+#bottom .bottom-c .bottom-c-c ul li a {
+    text-decoration: none;
+    font-size: 13px;
+    color: #ACACAC;
+}
+
+#bottom .bottom-c .bottom-c-c ul li a:hover {
+    color: #666;
+}
+
+#bottom .bottom-c .bottom-c-c span {
+    display: inline-block;
+    margin-top: 4px;
+    margin-left: 30px;
+    text-align: right;
+    width: 292px;
+    line-height: 29px;
+    font-size: 12px;
+    color: #BCBCBC;
+}
+
+#bottom .bottom-c .ewm {
+    margin-top: -20px;
+    width: 120px;
+    height: 122px;
+}
+
+#bottom .bottom-c .wx {
+    margin-left: 14px;
+}
+
+#bottom .bottom-c .app {
+    margin-left: 6px;
+}
+
+#bottom .bottom-c .ewm span {
+    display: inline-block;
+    font-size: 16px;
+    width: 120px;
+    text-align: center;
+}
+
+#bottom .bottom-c .ewm img {
+    margin-top: 10px;
+    margin-left: 14px;
+    width: 92px;
+    height: 84px;
+}
+/* bottom end */

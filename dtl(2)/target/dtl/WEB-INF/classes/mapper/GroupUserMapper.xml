@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GroupUserMapper">
+
+    <resultMap id="groupSInfo" type="com.vo.GroupListSimpleInfo">
+        <result column="groupName" property="groupName" javaType="String"></result>
+        <result column="imgUrl" property="imgUrl" javaType="String"></result>
+        <result column="groupId" property="groupId" javaType="Integer"></result>
+    </resultMap>
+
+    <select id="getGroupListSInfo" parameterType="String" resultMap="groupSInfo">
+        SELECT
+            g.group_name groupName,
+            g.group_img imgUrl,
+            gu.group_id groupId
+        FROM
+            group_user gu,
+            groupp g
+        WHERE
+            gu.group_id = g.id
+            AND gu.apply_status = 1
+            AND gu.user_id = #{userId}
+        ORDER BY
+            g.group_name
+    </select>
+
+</mapper>

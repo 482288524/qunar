@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.BillInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.BillInfo">
+        <id column="bill_no" jdbcType="VARCHAR" property="billNo"/>
+        <result column="queue_no" jdbcType="VARCHAR" property="queueNo"/>
+        <result column="patient_id" jdbcType="VARCHAR" property="patientId"/>
+        <result column="appointment_id" jdbcType="BIGINT" property="appointmentId"/>
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="doctor_id" jdbcType="INTEGER" property="doctorId"/>
+        <result column="bill_tm" jdbcType="TIMESTAMP" property="billTm"/>
+        <result column="business_id" jdbcType="VARCHAR" property="businessId"/>
+        <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
+        <result column="if_complete" jdbcType="VARCHAR" property="ifComplete"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+    </resultMap>
+
+    <select id="getBillInfo" parameterType="billInfo" resultMap="BaseResultMap">
+        select * from t_bill_info b
+        where 1=1
+        <if test="billInfo.queueNo != null and billInfo.queueNo != ''">
+            AND b.queue_no like '%${billInfo.queueNo}%'
+        </if>
+        <if test="billInfo.patientId != null and billInfo.patientId != ''">
+            AND b.patient_id like '%${billInfo.patientId}%'
+        </if>
+        <if test="billInfo.appointmentId != null and billInfo.appointmentId != ''">
+            AND b.appointment_id like '%${billInfo.appointmentId}%'
+        </if>
+        <if test="billInfo.departmentId != null and billInfo.departmentId != ''">
+            AND b.department_id like '%${billInfo.departmentId}%'
+        </if>
+        <if test="billInfo.doctorId != null and billInfo.doctorId != ''">
+            AND b.doctor_id like '%${billInfo.doctorId}%'
+        </if>
+        <if test="billInfo.billTm != null and billInfo.billTm != ''">
+            AND b.bill_tm = #{billInfo.billTm}
+        </if>
+        <if test="billInfo.businessId != null and billInfo.businessId != ''">
+            AND b.business_id = #{billInfo.businessId}
+        </if>
+        <if test="billInfo.conditions != null and billInfo.conditions != ''">
+            AND b.conditions like '%${billInfo.conditions}%'
+        </if>
+        <if test="billInfo.ifComplete != null and billInfo.ifComplete != ''">
+            AND b.if_complete like '%${billInfo.ifComplete}%'
+        </if>
+    </select>
+
+
+</mapper>

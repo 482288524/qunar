@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/regist.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../jQuery/dist/jquery.validate.min.js"></script>
+    <script src="../../jQuery/dist/localization/messages_zh.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <style>
+        #top .top-t .top-t-center #loginBtn{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div id="regist">
+        <div class="center">
+            <div class="rg-new">
+                <a href="#">注册新用户</a>
+            </div>
+            <div class="rg-nr">
+                <form id="rg-msg" class="add-form">
+                    <table>
+                        <tr>
+                            <td>姓名:</td>
+                            <td><input id="realName" name="realName" type="text" placeholder="请输入您的真实姓名"></td>
+                        </tr>
+                        <tr>
+                            <td>性别:</td>
+                            <td>
+                                <input type="radio" name="sex" id="sex1" value="男" checked>男
+                                <input type="radio" name="sex" id="sex2" value="女">女
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td>证件类型:</td>
+                            <td>
+                                <select class="required:true">
+                                    <option value="-1">请选择证件类型</option>
+                                    <option value="1">身份证</option>
+                                    <option value="2">护照</option>
+                                    <option value="3">港澳通行证</option>
+                                    <option value="4">台胞证</option>
+                                </select>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td>手机号码:</td>
+                            <td><input id="phoneNumber" name="phoneNumber" type="text" value="" placeholder="请填写手机号码" readonly></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>身份证号:</td>
+                            <td><input id="idCardNo" name="idCardNo" type="text" placeholder="请您使用有效证件号码注册"></td>
+                        </tr> -->
+                        <tr>
+                            <td>设置密码:</td>
+                            <td><input id="password" name="password" type="password" placeholder="请设置密码"></td>
+                        </tr>
+                        <tr>
+                            <td>确认密码:</td>
+                            <td><input id="twoPassword" name="twoPassword" type="password" placeholder="请再次输入密码"></td>
+                        </tr>
+                        <!-- <tr>
+                            <td>邮箱:</td>
+                            <td><input id="email" name="email" type="text" placeholder=""></td>
+                        </tr> -->
+                        <!-- <tr>
+                            <td>验证码:</td>
+                            <td>
+                                <input type="text" id="yzm">
+                                <input type="button" id="bt1" value="获取验证码">
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td colspan="2">
+                                <input class="submit" type="submit" id="bt2" value="注册">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+    <script>
+        $(document).ready(function () {
+            $(".header").load("header.html");
+            $(".footer").load("footer.html");          
+        });
+
+        $("#phoneNumber").focus(function(){
+            $("#phoneNumber").removeAttr("readonly");
+        })
+
+        // 手机号码验证
+        $.validator.addMethod("isMobile", function (value, element) {
+            let length = value.length;
+            let mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+        $().ready(function () {
+            $("#rg-msg").validate({
+                // onfocusout: function (element) {
+                //     this.element(element);
+                // },
+                rules: {
+                    realName: {
+                        required: true,
+                        minlength: 2
+                    },
+                    // email: "email",
+                    // idCardNo: {
+                    //     required: true,
+                    //     isIdCardNo: true
+                    // },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    twoPassword: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#password"
+                    },
+                    phoneNumber: {
+                        required: true,
+                        isMobile: true
+                    },
+                },
+                messages: {
+                    realName: {
+                        required: "请输入您的真实姓名",
+                        minlength: "姓名长度不能小于 2 位"
+                    },
+                    // email: "邮箱格式错误",
+                    // idCardNo: {
+                    //     required: "请输入您的身份证号",
+                    //     isIdCardNo: "请正确输入您的身份证号码",
+                    // },
+                    password: {
+                        required: "请设置密码",
+                        minlength: "密码长度不能小于 5 位"
+                    },
+                    twoPassword: {
+                        required: "请确认密码",
+                        minlength: "密码长度不能小于 5 位",
+                        equalTo: "两次密码输入不一致"
+                    },
+                    phoneNumber: {
+                        required: "请输入手机号码",
+                        isMobile: "请正确填写您的手机号码"
+                    },
+                },
+                //success: "valid",
+                submitHandler: function (form) {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8080/insertUser",
+                        dataType: "json",
+                        data: $("#rg-msg").serialize(),
+                        success: function (result) {
+                            alert(result.info)
+                            if (result.info == '注册成功') {    
+                                window.location.href = "./index.html";
+                            }
+                        },
+                    });
+                },
+                invalidHandler: function (form, validator) {  //不通过回调 
+                    alert("请正确填写您的信息!");
+                },
+            })
+        });
+
+    </script>
+</body>
+
+</html>

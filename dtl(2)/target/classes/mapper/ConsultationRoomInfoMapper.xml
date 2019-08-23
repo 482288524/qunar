@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ConsultationRoomInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.ConsultationRoomInfo">
+        <id column="consultation_id" jdbcType="INTEGER" property="consultationId"/>
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="consultation_name" jdbcType="VARCHAR" property="consultationName"/>
+        <result column="consultation_type" jdbcType="VARCHAR" property="consultationType"/>
+    </resultMap>
+
+    <select id="getConsultationRoomInfo" parameterType="consultationRoomInfo" resultMap="BaseResultMap">
+        select * from t_consultation_room_info CRI
+        where 1=1
+        <if test="consultationRoomInfo.departmentId != null and consultationRoomInfo.departmentId != ''">
+            AND CRI.department_id = #{consultationRoomInfo.departmentId}
+        </if>
+        <if test="consultationRoomInfo.consultationName != null and consultationRoomInfo.consultationName != ''">
+            AND CRI.consultation_name like '%${consultationRoomInfo.consultationName}%'
+        </if>
+        <if test="consultationRoomInfo.consultationType != null and consultationRoomInfo.consultationType != ''">
+            AND CRI.consultation_type = #{consultationRoomInfo.consultationType}
+        </if>
+    </select>
+
+
+</mapper>

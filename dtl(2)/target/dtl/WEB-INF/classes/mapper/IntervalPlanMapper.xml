@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.IntervalPlanMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.IntervalPlan">
+        <id column="interval_plan_id" jdbcType="INTEGER" property="intervalPlanId"></id>
+        <result column="plan_name" jdbcType="VARCHAR" property="planName"/>
+    </resultMap>
+
+    <select id="getIntervalPlan" parameterType="intervalPlan" resultMap="BaseResultMap">
+    select * from t_interval_plan interplan
+    where 1=1
+    <if test="intervalPlan.planName != null and intervalPlan.planName != ''">
+        AND interplan.plan_name like '%${intervalPlan.planName}%'
+    </if>
+    </select>
+</mapper>

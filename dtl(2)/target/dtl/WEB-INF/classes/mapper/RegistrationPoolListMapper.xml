@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RegistrationPoolListMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.RegistrationPoolList">
+        <id column="pool_list_id" jdbcType="BIGINT" property="poolListId"/>
+        <result column="pool_id" jdbcType="BIGINT" property="poolId"/>
+        <result column="bgn_tm" jdbcType="TIMESTAMP" property="bgnTm"/>
+        <result column="end_tm" jdbcType="TIMESTAMP" property="endTm"/>
+        <result column="registration_num" jdbcType="INTEGER" property="registrationNum"/>
+        <result column="add_num" jdbcType="INTEGER" property="addNum"/>
+        <result column="lock_num" jdbcType="INTEGER" property="lockNum"/>
+    </resultMap>
+
+    <select id="getRegistrationPoolList" parameterType="registrationPoolList" resultMap="BaseResultMap">
+        select * from t_registration_pool_list rpl
+        where 1=1
+        <if test="registrationPoolList.poolId != null and registrationPoolList.poolId != ''">
+            AND rpl.pool_id '%$like{registrationPoolList.poolId}%'
+        </if>
+        <if test="registrationPoolList.bgnTm != null and registrationPoolList.bgnTm != ''">
+            AND rpl.bgn_tm &gt; #{registrationPoolList.bgnTm}
+        </if>
+        <if test="registrationPoolList.endTm != null and registrationPoolList.endTm != ''">
+            AND rpl.end_tm &lt; #{registrationPoolList.endTm}
+        </if>
+        order by rpl.pool_id
+    </select>
+
+</mapper>

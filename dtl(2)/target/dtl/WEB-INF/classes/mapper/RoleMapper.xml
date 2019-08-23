@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.Role">
+        <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="first_url" jdbcType="VARCHAR" property="firstUrl"/>
+    </resultMap>
+
+    <select id="getRole" parameterType="role" resultMap="BaseResultMap">
+        select * from t_role r
+        where 1=1
+        <if test="role.roleId != null and role.roleId != ''">
+            AND r.role_id = #{role.roleId}
+        </if>
+        <if test="role.roleCode != null and role.roleCode != ''">
+            AND r.role_code like '%${role.roleCode}%'
+        </if>
+        <if test="role.roleName != null and role.roleName != ''">
+            AND r.role_name like '%${role.roleName}%'
+        </if>
+        <if test="role.flag != null and role.flag != ''">
+            AND r.flag = #{role.flag}
+        </if>
+    </select>
+
+
+</mapper>

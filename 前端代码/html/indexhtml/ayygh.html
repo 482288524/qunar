@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>按医院挂号</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/ayygh.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../jQuery/dist/jquery.validate.min.js"></script>
+    <script src="../../jQuery/dist/localization/messages_zh.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/cookie.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="header"></div>
+        <div class="center">
+            <div class="msg hospitalLevel">
+                <div class="left">
+                    <span>医院等级</span>
+                    <!-- <a class="all">全部</a> -->
+                </div>
+                <ul id="levelUl">
+                    <li><a class="all">全部</a></li>
+                    <li><a>三级医院</a></li>
+                    <li><a>二级医院</a></li>
+                    <li><a>一级医院</a></li>
+                </ul>
+            </div>
+            <div class="msg hospitalArea">
+                <div class="left">
+                    <span>医院位置</span>
+                    <!-- <a class="all">全部</a> -->
+                </div>
+                <ul id="areaUl">
+                    <li><a class="all">全部</a></li>
+                    <li><a>东城区</a></li>
+                    <li><a>西城区</a></li>
+                    <li><a>朝阳区</a></li>
+                    <li><a>丰台区</a></li>
+                    <li><a>石景山区</a></li>
+                    <li><a>海淀区</a></li>
+                </ul>
+            </div>
+            <div class="bottom"></div>
+            <div id="pageDiv">
+                <button id="prePage" onclick="previousPage()" disabled>首页</button>
+                <span>当前为第</span><span id="cPage">1</span><span class="pageSpan">页</span><span id="totalPage">共8页</span>
+                <button id="nextPage" onclick="nextPage()">下一页</button>
+                <span>跳到第</span><input type="number" min="1" id="skipPage"><span class="pageSpan">页</span><button id="confirm"
+                    onclick="skip()">确定</button>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+
+    <script>
+        let hospitalLevel = "全部";
+        let hospitalArea = "全部";
+        let hospitalList;
+        let pageSize = 6;
+        let currentPage = 1;
+        let totalPage;
+
+        $(document).ready(function () {
+            $(".header").load("./header.html");
+            $(".footer").load("./footer.html");
+        });
+
+        window.onload = function () {
+            let levelList = document.getElementById("levelUl").getElementsByTagName("a");
+            let areaList = document.getElementById("areaUl").getElementsByTagName("a");
+            for (let i = 0; i < levelList.length; i++) {
+                levelList[i].onclick = function () {
+                    for (let i = 0; i < levelList.length; i++) {
+                        levelList[i].style.backgroundColor = '#F8F8F8';
+                        levelList[i].style.color = '#000';
+                    }
+                    //console.log(this.innerHTML)
+                    hospitalLevel = this.innerHTML;
+                    currentPage = 1;
+                    document.getElementById("cPage").innerHTML = currentPage;
+                    getAjax("http://localhost:8080/selectHospital", showHospital);
+                    judgePage(currentPage);
+                    this.style.backgroundColor = '#60BFF2';
+                    this.style.color = '#fff';
+                }
+            }
+            for (let j = 0; j < areaList.length; j++) {
+                areaList[j].onclick = function () {
+                    for (let j = 0; j < areaList.length; j++) {
+                        areaList[j].style.backgroundColor = '#F8F8F8';
+                        areaList[j].style.color = '#000';
+                    }
+                    hospitalArea = this.innerHTML;
+                    currentPage = 1;
+                    document.getElementById("cPage").innerHTML = currentPage;
+                    getAjax("http://localhost:8080/selectHospital", showHospital);
+                    judgePage(currentPage);
+                    this.style.backgroundColor = '#60BFF2';
+                    this.style.color = '#fff';
+                }
+            }
+        }
+
+        // function listClick(list) {
+        //     for (let i = 0,len = list.length; i < len; i++) {
+        //         list[i].onclick = function () {
+        //             for (let i = 0; i < list.length; i++) {
+        //                 list[i].style.backgroundColor = '#fff';
+        //                 list[i].style.color = '#000';
+        //             }
+        //             hospitalLevel = this.innerHTML;
+        //             currentPage = 1;
+        //             document.getElementById("cPage").innerHTML = currentPage;
+        //             getAjax("http://localhost:8080/selectHospital", showHospital);
+        //             judgePage(currentPage);
+        //             this.style.backgroundColor = '#60BFF2';
+        //             this.style.color = '#fff';
+        //         }
+        //     }
+        // }
+
+        function showHospital(data) {
+            document.getElementsByClassName("bottom")[0].innerHTML = '';
+            hospitalList = filterByLevel(data.hospitalList);
+            hospitalList = filterByArea(hospitalList);
+            totalPage = Math.ceil(hospitalList.length / pageSize);
+            //console.log(totalPage)
+            document.getElementById("totalPage").innerHTML = "共" + totalPage + "页";
+            judgePage(totalPage,currentPage)
+            for (i in hospitalList) {
+                if (i > (currentPage - 1) * pageSize - 1 && i < currentPage * pageSize) {
+                    let dir = "../../images/" + hospitalList[i].imgUrl;
+                    let div = `<img src=${dir} width='200' height='150'></img>` +
+                        "<h5>" + hospitalList[i].hospitalName + "</h5>" +
+                        "<span>" + hospitalList[i].level + "</span>" +
+                        "<p class='phone'>" + hospitalList[i].phone + "</p>" +
+                        "<p class='address'>" + hospitalList[i].address + "</p>" +
+                        `<button onclick='jumpHos(this.id)' id='${hospitalList[i].hospitalId}'></button>`;
+                    $(".bottom").append("<div>" + div + "</div>");
+                }
+            }
+        }
+        getAjax("http://localhost:8080/selectHospital", showHospital);
+
+        function filterByLevel(hospitalList) {
+            let filterData = [];
+            if (hospitalLevel == "全部") {
+                return hospitalList
+            }
+            for (let i in hospitalList) {
+                if (hospitalList[i].level.slice(0, 2) == hospitalLevel.slice(0, 2)) {
+                    filterData.push(hospitalList[i]);
+                }
+            }
+            return filterData
+        }
+
+        function filterByArea(hospitalList) {
+            let filterData = [];
+            if (hospitalArea == "全部") {
+                return hospitalList
+            }
+            for (let i in hospitalList) {
+                if (hospitalList[i].area == hospitalArea) {
+                    filterData.push(hospitalList[i]);
+                }
+            }
+            return filterData
+        }
+
+        function getAjax(url, func) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    func(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        // 上一页
+        function previousPage() {
+            currentPage--;
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectHospital", showHospital);
+            if (currentPage == 1) {
+                document.getElementById("prePage").innerHTML = '首页';
+                $("#prePage").attr("disabled", true);
+            }
+            if (currentPage != Math.ceil(hospitalList.length / pageSize)) {
+                document.getElementById("nextPage").innerHTML = '下一页';
+                $("#nextPage").attr("disabled", false);
+            }
+        }
+
+        // 下一页
+        function nextPage() {
+            currentPage++;
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectHospital", showHospital);
+            if (currentPage == Math.ceil(hospitalList.length / pageSize)) {
+                document.getElementById("nextPage").innerHTML = '尾页';
+                $("#nextPage").attr("disabled", true);
+            }
+            if (currentPage != 1) {
+                document.getElementById("prePage").innerHTML = '上一页';
+                $("#prePage").attr("disabled", false);
+            }
+        }
+
+        // 跳至第几页
+        function skip() {
+            currentPage = $("#skipPage").val();
+            $("#skipPage").val('');
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectHospital", showHospital);
+        }
+
+        // 通过判断总页数及当前页改变按钮及输入框属性
+        function judgePage(totalPage,currentPage) {
+            if (totalPage == 1) {
+                document.getElementById("prePage").innerHTML = '首页';
+                $("#prePage").attr("disabled", true);
+                document.getElementById("nextPage").innerHTML = '尾页';
+                $("#nextPage").attr("disabled", true);
+                $("#skipPage").attr("disabled",true);
+                $("#confirm").attr("disabled",true);
+            } else {
+                $("#skipPage").attr("disabled",false);
+                $("#confirm").attr("disabled",false);
+                if (currentPage == 1) {
+                    document.getElementById("prePage").innerHTML = '首页';
+                    $("#prePage").attr("disabled", true);
+                    document.getElementById("nextPage").innerHTML = '下一页';
+                    $("#nextPage").attr("disabled", false);
+                } else if (currentPage == totalPage) {
+                    document.getElementById("nextPage").innerHTML = '尾页';
+                    $("#nextPage").attr("disabled", true);
+                    document.getElementById("prePage").innerHTML = '上一页';
+                    $("#prePage").attr("disabled", false);
+                } else {
+                    document.getElementById("prePage").innerHTML = '上一页';
+                    $("#prePage").attr("disabled", false);
+                    document.getElementById("nextPage").innerHTML = '下一页';
+                    $("#nextPage").attr("disabled", false);
+                }
+            }
+        }
+
+        //点击现在预约按钮跳转至医院界面
+        function jumpHos(id){
+            console.log(id)
+            window.location.href = "./hospital.html?hosId=" +id;
+        }
+    </script>
+</body>
+
+</html>

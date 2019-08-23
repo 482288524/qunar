@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AdminInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.AdminInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+    </resultMap>
+
+    <select id="getAdminInfo" parameterType="adminInfo" resultMap="BaseResultMap">
+        select * from t_admin_info ad
+        where 1=1
+        <if test="adminInfo.realName != null and adminInfo.realName != ''">
+            AND ad.real_name like '%${adminInfo.realName}%'
+        </if>
+        <if test="adminInfo.phoneNumber != null and adminInfo.phoneNumber != ''">
+            AND ad.phone_number like '%${adminInfo.phoneNumber}%'
+        </if>
+        <if test="adminInfo.email != null and adminInfo.email != ''">
+            AND ad.email like '%${adminInfo.email}%'
+        </if>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PriorityConditionSetMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.PriorityConditionSet">
+        <id column="condition_id" jdbcType="INTEGER" property="conditionId"/>
+        <result column="condition_name" jdbcType="VARCHAR" property="conditionName"/>
+        <result column="minus_minutes" jdbcType="INTEGER" property="minusMinutes"/>
+        <result column="priority_type" jdbcType="INTEGER" property="priorityType"/>
+        <result column="condition_sql" jdbcType="VARCHAR" property="conditionSql"/>
+    </resultMap>
+
+    <select id="getPriorityConditionSet" parameterType="priorityConditionSet" resultMap="BaseResultMap">
+        select * from t_priority_condition_set pcs
+        where 1=1
+        <if test="priorityConditionSet.conditionName != null and priorityConditionSet.conditionName != ''">
+            AND pcs.condition_name like '%${priorityConditionSet.conditionName}%'
+        </if>
+        <if test="priorityConditionSet.priorityType != null and priorityConditionSet.priorityType != ''">
+            AND pcs.priority_type = #{priorityConditionSet.priorityType}
+        </if>
+        <if test="priorityConditionSet.conditionSql != null and priorityConditionSet.conditionSql != ''">
+            AND pcs.condition_sql like '%${priorityConditionSet.conditionSql}%'
+        </if>
+        group by pcs.priority_type
+    </select>
+</mapper>

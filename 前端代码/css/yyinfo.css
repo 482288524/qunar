@@ -1,0 +1,172 @@
+.center {
+    width: 1000px;
+    height: ayto;
+    margin: 0 auto;
+    margin-top: 59px;
+}
+
+.center #myTab #reselect {
+    margin-left: 522px;
+    color: #2DA5E1;
+    cursor: pointer;
+}
+
+.center #myTab .active a {
+    background-color: #F7F7F7;
+}
+
+.center #myTabContent2 .tab-pane {
+    padding: 30px;
+    width: 1000px;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+/* rule1 start */
+.center #myTabContent2 .tab-pane .rule1 {
+    padding: 20px;
+    margin: auto;
+    width: 940px;
+    height: 386px;
+    background-color: #F7F7F7;
+}
+
+#myTabContent2 .tab-pane .rule1 img,
+#myTabContent2 .tab-pane .rule1 div {
+    float: left;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+#myTabContent2 .tab-pane .rule1 div {
+    width: 500px;
+    margin-left: 60px;
+    margin-bottom: 30px;
+}
+
+#myTabContent2 .tab-pane .rule1 div p {
+    color: #90908F;
+}
+
+#myTabContent2 .tab-pane .rule1 div .p2 {
+    margin-top: -12px;
+    margin-left: 70px;
+}
+
+#myTabContent2 .tab-pane .rule1 div p span:first-child {
+    font-size: 15px;
+    color: #000;
+}
+
+#myTabContent2 .tab-pane .rule1 div p span:nth-child(2) {
+    font-size: 15px;
+    color: #2DA5E1;
+}
+
+#myTabContent2 .tab-pane .rule1 hr {
+    width: 900px;
+    height: 2px;
+    border-color: #ccc;
+}
+
+.right {
+    float: right;
+}
+
+#myTabContent2 .tab-pane .rule1 p span {
+    margin-left: 10px;
+}
+
+/* rule1 end */
+
+/* yyMsg start */
+.center #myTabContent2 .tab-pane .yyMsg {
+    padding: 20px;
+    width: 940px;
+    height: 350px;
+}
+
+#myTabContent2 .tab-pane .yyMsg h4 {
+    margin-left: 300px;
+    margin-bottom: 30px;
+    color: red;
+}
+
+#myTabContent2 .tab-pane .yyMsg table {
+    width: 420px;
+    margin: auto;
+}
+
+#myTabContent2 .tab-pane .yyMsg table tr {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#myTabContent2 .tab-pane .yyMsg table tr:nth-child(3) {
+    display: inline-block;
+    margin-top: -10px;
+}
+
+#myTabContent2 .tab-pane .yyMsg table tr td:first-child {
+    width: 74px;
+    text-align: right;
+}
+
+#myTabContent2 .tab-pane .yyMsg table tr td:nth-child(2) {
+    padding-left: 20px;
+    width: 340px;
+}
+
+#myTabContent2 .tab-pane .yyMsg table tr input[type=text],
+#myTabContent2 .tab-pane .yyMsg table tr select {
+    width: 186px;
+    height: 26px;
+}
+
+#myTabContent2 .tab-pane .yyMsg table input[type=radio],
+#myTabContent2 .tab-pane .yyMsg table input[type=checkbox] {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-bottom: 8px;
+}
+
+
+#myTabContent2 .tab-pane .yyMsg table .pro-td label{
+    margin-right: 6px;
+}
+
+.jzr {
+    padding-top: 8px;
+}
+
+#addjzr {
+    display: inline-block;
+    margin-top: -30px;
+    margin-left: 78px;
+}
+
+#addjzr a {
+    color: #2DA5E1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#myTabContent2 .tab-pane .yyMsg form button {
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #2DA5E1;
+}
+
+.btn1 {
+    margin-left: 30px;
+}
+
+.btn2 {
+    margin-left: 50px;
+}
+/* yyMsg end */

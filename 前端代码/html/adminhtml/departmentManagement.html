@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>科室管理</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../../css/adminCenterRight.css" type="text/css">
+</head>
+
+<body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align:center;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="rg-msg" method="POST" action="">
+                        <table>
+                            <tr>
+                                <td>科室编号:</td>
+                                <td><input id="confirmPassword" name="confirmPassword" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>科室名称:</td>
+                                <td><input id="phoneNum" name="phoneNum" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>科室状态:</td>
+                                <td><input id="phoneNum" name="phoneNum" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>备注:</td>
+                                <td><input id="phoneNum" name="phoneNum" type="text"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <div class="xxk table-responsive hide" id="ksgl">
+        <div class="right-t">
+            <h4>科室管理</h4>
+        </div>
+        <div class="right-b">
+            <div class="sousuo2">
+                <form id="form0">
+                    <input type="text" name="patientId" class="selectInput" placeholder="按科室编号搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="realName" class="selectInput" placeholder="按科室名称搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="phoneNumber" class="selectInput" placeholder="按科室状态搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                </form>
+            </div>
+            <button class="add" data-toggle="modal" data-target="#myModal">
+                增加
+            </button>
+            <table id="table3" class="table">
+                <tr>
+                    <th>科室编号</th>
+                    <th>科室类型</th>
+                    <th>科室名称</th>
+                    <th>科室状态</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function c() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/selectDepartmentAllInfo",
+                dataType: "json",
+                success: function (data) {
+                    // console.log(data)
+                    let currentPage = 1,
+                        pageSize =10;
+                    for (i in data.departmentInfo) {
+                        // console.log(data)
+                        if (i > (currentPage - 1) * pageSize - 1 && i < currentPage * pageSize) {
+                            let tr = "<td>" + data.departmentInfo[i].departmentId + "</td>" +
+                                "<td>" + data.departmentInfo[i].departmentType + "</td>" +
+                                "<td>" + data.departmentInfo[i].departmentName + "</td>" +
+                                "<td>" + data.departmentInfo[i].departmentStatus + "</td>" +
+                                "<td>" + data.departmentInfo[i].memo + "</td>" +
+                                "<td><button>修改</button><button>删除</button></td>";
+                            $("#table3").append("<tr>" + tr + "</tr>");
+                        }
+                    }
+                }
+            });
+        }
+        c();
+    </script>
+</body>
+
+</html>

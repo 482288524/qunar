@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ArrangementInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.ArrangementInfo">
+        <id column="arrangement_id" jdbcType="INTEGER" property="arrangementId"/>
+        <result column="consultation_id" jdbcType="INTEGER" property="consultationId"/>
+        <result column="doctor_id" jdbcType="INTEGER" property="doctorId"/>
+        <result column="arrangement_dt" jdbcType="VARCHAR" property="arrangementDt"/>
+        <result column="bgn_tm" jdbcType="VARCHAR" property="bgnTm"/>
+        <result column="end_tm" jdbcType="VARCHAR" property="endTm"/>
+        <result column="zjpb" jdbcType="INTEGER" property="zjpb"/>
+        <result column="ghje" jdbcType="VARCHAR" property="ghje"/>
+        <result column="ghlb" jdbcType="INTEGER" property="ghlb"/>
+    </resultMap>
+
+    <select id="getArrangementInfo" parameterType="arrangementInfo" resultMap="BaseResultMap">
+        select * from t_arrangement_info arrInfo
+        where 1=1
+        <if test="arrangementInfo.consultationId != null and arrangementInfo.consultationId != ''">
+            AND arrInfo.consultation_id like '%${arrangementInfo.consultationId}%'
+        </if>
+        <if test="arrangementInfo.doctorId != null and arrangementInfo.doctorId != ''">
+            AND arrInfo.doctor_id like '%${arrangementInfo.doctorId}%'
+        </if>
+        <if test="arrangementInfo.arrangementDt != null and arrangementInfo.arrangementDt != ''">
+            AND arrInfo.arrangement_dt = #{arrangementInfo.arrangementDt}
+        </if>
+        <if test="arrangementInfo.bgnTm != null and arrangementInfo.bgnTm != ''">
+            AND arrInfo.bgn_tm &gt; #{arrangementInfo.bgnTm}
+        </if>
+        <if test="arrangementInfo.endTm != null and arrangementInfo.endTm != ''">
+            AND arrInfo.end_tm &lt; #{arrangementInfo.endTm}
+        </if>
+        <if test="arrangementInfo.zjpb != null and arrangementInfo.zjpb != ''">
+            AND arrInfo.zjpb = #{arrangementInfo.zjpb}
+        </if>
+        <if test="arrangementInfo.ghlb != null and arrangementInfo.ghlb != ''">
+            AND arrInfo.ghlb = #{arrangementInfo.ghlb}
+        </if>
+    </select>
+
+
+</mapper>

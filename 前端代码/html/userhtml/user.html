@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>用户个人中心</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/user.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../jQuery/dist/jquery.validate.min.js"></script>
+    <script src="../../jQuery/dist/localization/messages_zh.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/cookie.js"></script>
+    <style>
+        #wdyy ul li {
+            width: 117px;
+        }
+
+        #wdyy ul li:first-child,
+        #wdyy .yymsg span:nth-child(2) {
+            width: 195px;
+        }
+
+        #wdyy .yymsg span {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            width: 117px;
+            height: 26px;
+        }
+
+        #wdyy .yymsg button {
+            margin-left: 20px;
+            width: 75px;
+            height: 26px;
+            color: #fff;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            background-color: #2DA5E1;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="header"></div>
+        <div class="center">
+            <div class="left">
+                <div class="tx">
+                    <img src="../../images/tx_user.png" width="400" height="400">
+                    <span>[<a class="index">首页</a>]</span>
+                    <span>[<a class="exit">退出</a>]</span>
+                </div>
+                <ul id="ul1">
+                    <li class="active"><a href="#wdyy">我的预约</a></li>
+                    <li><a href="#wdsc">我的收藏</a></li>
+                    <li><a href="#yjfk">意见反馈</a></li>
+                    <li><a href="#jzrgl">就诊人管理</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div class="xxk" id="wdyy">
+                    <div class="right-t">
+                        <h4>我的预约</h4>
+                    </div>
+                    <ul>
+                        <li><span>科室</span></li>
+                        <li><span>医生</span></li>
+                        <li><span>就诊人</span></li>
+                        <li><span>时间</span></li>
+                        <li><span>状态</span></li>
+                        <li><span>操作</span></li>
+                    </ul>
+                    <div class="yymsg"></div>
+                </div>
+                <div class="xxk hide" id="wdsc">
+                    <div class="right-t">
+                        <h4>我的收藏</h4>
+                    </div>
+                    <ul>
+                        <li><span>姓名</span></li>
+                        <li><span>所在医院科室</span></li>
+                        <li><span>擅长疾病</span></li>
+                        <li><span>联系方式</span></li>
+                        <li><span>操作</span></li>
+                    </ul>
+                    <div class="wdsc"></div>
+                </div>
+                <div class="xxk hide" id="yjfk">
+                    <div class="right-t">
+                        <h4>意见反馈</h4>
+                    </div>
+                    <ul>
+                        <li><span>反馈内容</span></li>
+                        <li><span>反馈时间</span></li>
+                        <li>
+                            <select>
+                                <option value="1">回复状态</option>
+                                <option value="2">未回复</option>
+                                <option value="3">已回复</option>
+                                <option value="4">全部</option>
+                            </select>
+                        </li>
+                        <li><span>回复时间</span></li>
+                        <li><span>操作</span></li>
+                    </ul>
+                    <div class="yj">
+                        <textarea rows="6" cols="60"></textarea>
+                        <div id="remind">请输入您的意见，我们会根据您的反馈认真改进!</div>
+                        <button>提交意见</button>
+                    </div>
+                </div>
+                <div class="xxk hide" id="jzrgl">
+                    <div class="right-t">
+                        <h4>就诊人管理</h4>
+                        <button>添加就诊人+</button>
+                    </div>
+                    <ul class="jzrMsg">
+                        <li>姓名</li>
+                        <li>性别</li>
+                        <li>手机号码</li>
+                        <li>密码</li>
+                        <li>操作</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".header").load("../indexhtml/header.html");
+            $(".footer").load("../indexhtml/footer.html");
+            setTimeout(function(){
+                console.log($("#shouye").text())
+                $("#shouye").css('display','none');
+            },100)
+        });
+
+        let wdyy = document.getElementsByClassName("yymsg")[0],
+            wdsc = document.getElementsByClassName("wdsc")[0];
+        window.onload = function () {
+            let ul1 = document.getElementById("ul1"),
+                li = ul1.getElementsByTagName("li"),
+                div = document.getElementsByClassName("xxk");
+            for (let i = 0; i < li.length; i++) {
+                li[i].index = i;
+                li[i].onclick = function () {
+                    for (let i = 0; i < li.length; i++) {
+                        li[i].className = "";
+                    }
+                    this.className = "active";
+                    for (let j = 0; j < div.length; j++) {
+                        div[j].className = "xxk hide";
+                    }
+                    div[this.index].className = "xxk show";
+                }
+            }
+
+            getAjax("http://localhost:8080/selectUser?userId=" + getUserId(), getJzrMsg);
+            function getJzrMsg(data) {
+                // console.log(data)
+                let userList = data.userList[0];
+                let span = "<span>" + userList.realName + "</span>" +
+                    "<span>" + userList.sex + "</span>" +
+                    "<span>" + userList.phoneNumber + "</span>" +
+                    "<span>" + userList.password + "</span>" +
+                    `<button id='${userList.userId}'>修改</button>`;
+                $(".jzrMsg").append(span);
+            }
+
+            getAjax("http://localhost:8080/selectPatient?realName=" + getRealName(), getyyMsg);
+            function getyyMsg(data) {
+                // console.log(data)
+                let yyMsgList = data.patientList;
+                for (let i in yyMsgList) {
+                    // console.log(yyMsgList[i])
+                    let span = `<span style='display:none;'>${yyMsgList[i].patientId}</span>` +
+                        "<span>" + yyMsgList[i].hosName + "-" + yyMsgList[i].depName + "</span>" +
+                        "<span>" + yyMsgList[i].doctorName +"</span>" +
+                        "<span>" + yyMsgList[i].realName + "</span>" +
+                        "<span>" + yyMsgList[i].time + "</span>" +
+                        `<span id='${i}'>${yyMsgList[i].status}</span>` +
+                        `<button onclick='del(${yyMsgList[i].patientId})'>取消预约</button>`;
+                    $(".yymsg").append(`<div id='${yyMsgList[i].patientId}'>${span}</div>`);
+                    console.log($.trim(wdyy.innerHTML))
+                    if ($(`#${i}`).text() == '已就诊') {
+                        $(`#${i}`).css('color', 'red');
+                        $(`#${yyMsgList[i].patientId}`).find('button').attr('disabled', true);
+                        $(`#${yyMsgList[i].patientId}`).find('button').css('background-color', '#ccc');
+                    }
+                }
+                if ($.trim(wdyy.innerHTML) == "" || $.trim(wdyy.innerHTML) == null) {
+                    $(".yymsg")[0].innerHTML = "<h4>暂无预约记录</h4>";
+                    $(".yymsg").addClass("right-b");
+                }
+            }
+
+            if ($.trim(wdsc.innerHTML) == "" || $.trim(wdsc.innerHTML) == null) {
+                $(".wdsc")[0].innerHTML = "<h4>暂无收藏</h4>";
+                $(".wdsc").addClass("right-b");
+            }
+        }
+
+        function getAjax(url, func) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    func(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function del(id) {
+            let message = confirm("是否取消预约?");
+            if (message == true) {
+                getAjax("http://localhost:8080/deletePatient?patientId=" + id, del);
+                alert("取消预约成功!");
+                location.reload();
+            } else {
+                alert("操作取消!");
+            }
+            function del() {
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>号源池管理</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../../css/adminCenterRight.css" type="text/css">
+    <style>
+        .modal-body #form6 table tr {
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .modal-body #form6 table tr:nth-child(4),
+        .modal-body #form6 table tr:nth-child(5),
+        .modal-body #form6 table tr:nth-child(6) {
+            margin-left: -36px;
+        }
+
+        .modal-body #form6 table tr td select,
+        .modal-body #form7 table tr td select {
+            width: 178px;
+            height: 24px;
+        }
+
+        #table6 tr th:nth-child(3),
+        #table6 tr th:nth-child(8) {
+            width: 180px;
+        }
+
+        #myModal7 #form7 tr td:nth-child(2) {
+            width: 176px;
+        }
+
+        #hygl #pageDiv {
+            margin: 20px auto 0;
+            width: 406px;
+        }
+
+        #hygl #pageDiv button {
+            margin-right: 8px;
+            width: auto;
+            height: 24px;
+            font-size: 14px;
+        }
+
+        #hygl #pageDiv input[type=number] {
+            width: 40px;
+            text-align: center;
+        }
+
+        #hygl #pageDiv .pageSpan {
+            margin-right: 10px;
+        }
+
+        #hygl #pageDiv #totalPage {
+            margin-right: 4px;
+        }
+
+        #hygl #pageDiv #cPage {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal" tabindex="-1" role="dialog" id="myModal6">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel6">
+                        添加号源
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form6">
+                        <table>
+                            <tr>
+                                <td>科&nbsp;室:</td>
+                                <td>
+                                    <select id="departmentType" name="departmentType" onclick="getDepName()">
+                                        <option value="0">=====请选择科室====</option>
+                                        <option value="1">内科</option>
+                                        <option value="2">外科</option>
+                                        <option value="3">儿科</option>
+                                        <option value="4">五官</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>门&nbsp;诊:</td>
+                                <td>
+                                    <select id="departmentName" name="departmentName">
+                                        <option value="0">=====请选择门诊=====</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>星&nbsp;期:</td>
+                                <td>
+                                    <select id="week" name="week">
+                                        <option value="0">=====请选择星期=====</option>
+                                        <option value="1">星期一</option>
+                                        <option value="2">星期二</option>
+                                        <option value="3">星期三</option>
+                                        <option value="4">星期四</option>
+                                        <option value="5">星期五</option>
+                                        <option value="6">星期六</option>
+                                        <option value="7">星期日</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>开&nbsp;始&nbsp;时&nbsp;间:</td>
+                                <td><input id="bgnTm" name="bgnTm" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>结&nbsp;束&nbsp;时&nbsp;间:</td>
+                                <td><input id="endTm" name="endTm" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>号&nbsp;源&nbsp;数&nbsp;量:</td>
+                                <td><input id="registrationNum" name="registrationNum" type="number"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="add3()" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal7">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel7">
+                        修改号源信息
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form7">
+                        <table>
+                            <input id="planLstId" name="planLstId" type="text" hidden>
+                            <tr>
+                                <td>科&nbsp;室:</td>
+                                <td>
+                                    <select id="departmentTypeT" name="departmentType" onclick="getDepName()">
+                                        <option value="内科">内科</option>
+                                        <option value="外科">外科</option>
+                                        <option value="儿科">儿科</option>
+                                        <option value="五官">五官</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>门&nbsp;诊:</td>
+                                <td>
+                                    <select id="departmentNameT" name="departmentName"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>星&nbsp;期:</td>
+                                <td>
+                                    <select id="weekT" name="week">
+                                        <option value="1">星期一</option>
+                                        <option value="2">星期二</option>
+                                        <option value="3">星期三</option>
+                                        <option value="4">星期四</option>
+                                        <option value="5">星期五</option>
+                                        <option value="6">星期六</option>
+                                        <option value="7">星期日</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>开&nbsp;始&nbsp;时&nbsp;间:</td>
+                                <td><input id="bgnTmT" name="bgnTm" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>结&nbsp;束&nbsp;时&nbsp;间:</td>
+                                <td><input id="endTmT" name="endTm" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>号&nbsp;源&nbsp;数&nbsp;量:</td>
+                                <td><input id="registrationNumT" name="registrationNum" type="number"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="update3()" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="xxk table-responsive hide" id="hygl">
+        <div class="right-t">
+            <h4>号源池管理</h4>
+        </div>
+        <div class="right-b">
+            <div class="sousuo2">
+                <form id="form0">
+                    <input type="text" name="patientId" class="selectInput" placeholder="按时段编号搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="realName" class="selectInput" placeholder="按科室名称搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                    <input type="text" name="phoneNumber" class="selectInput" placeholder="按号源数量搜索">
+                    <div class="selectDiv" onclick="a()"></div>
+                </form>
+            </div>
+            <button class="add" data-toggle="modal" data-target="#myModal6">
+                增加
+            </button>
+            <table id="table6" class="table">
+                <tr>
+                    <th>明细编号</th>
+                    <th>时段编号</th>
+                    <th>科室</th>
+                    <th>门诊</th>
+                    <th>星期</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>号源数量</th>
+                    <th>操作</th>
+                </tr>
+            </table>
+            <div id="pageDiv">
+                <button id="prePage" onclick="previousPage()" disabled>首页</button>
+                <span>当前为第</span><span id="cPage">1</span><span class="pageSpan">页</span><span id="totalPage">共8页</span>
+                <button id="nextPage" onclick="nextPage()">下一页</button>
+                <span>跳到第</span><input type="number" min="1" id="skipPage"><span class="pageSpan">页</span><button
+                    id="confirm" onclick="skip()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let intervalPlanList;
+        let pageSize = 10;
+        let currentPage = 1;
+        let totalPage;
+
+        function showInterPlanLst(data) {
+            let len = document.getElementById("table6").rows.length;
+            for (let j = len - 1; j > 0; j--) {
+                document.getElementById("table6").deleteRow(j);
+            }
+            console.log(data)
+            intervalPlanList = data.intervalPlanLstList;
+            // console.log(intervalPlanList[0])
+            totalPage = Math.ceil(intervalPlanList.length / pageSize);
+            //console.log(totalPage)
+            document.getElementById("totalPage").innerHTML = "共" + totalPage + "页";
+            judgePage(totalPage, currentPage)
+            for (let i in intervalPlanList) {
+                if (i > (currentPage - 1) * pageSize - 1 && i < currentPage * pageSize) {
+                    let tr = "<td>" + intervalPlanList[i].planLstId + "</td>" +
+                        "<td>" + intervalPlanList[i].intervalPlanId + "</td>" +
+                        "<td>" + intervalPlanList[i].departmentType + "</td>" +
+                        "<td>" + intervalPlanList[i].departmentName + "</td>" +
+                        "<td>" + intervalPlanList[i].week + "</td>" +
+                        "<td>" + intervalPlanList[i].bgnTm + "</td>" + "<td>" + intervalPlanList[i].endTm + "</td>" +
+                        "<td>" + intervalPlanList[i].registrationNum + "</td>" +
+                        `<td><button data-toggle='modal' data-target='#myModal7' onclick='edit3(${i})'>修改</button>` +
+                        `<button onclick='del3(${intervalPlanList[i].intervalPlanId})'>删除</button></td>`;
+                    $("#table6").append(`<tr id='${intervalPlanList[i].intervalPlanId}'>${tr}</tr>`);
+                }
+            }
+        }
+        getAjax("http://localhost:8080/selectIntervalPlanLst2", showInterPlanLst)
+
+        function add3() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/insertIntervalPlanLst",
+                dataType: "json",
+                data: $("#form6").serialize(),
+                success: function (data) {
+                    alert(data.info);
+                    location.reload();
+                }
+            });
+
+        }
+
+        function del3(id) {
+            let message = confirm("是否确认删除?");
+            if (message == true) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/deleteBusinessInfo?intervalPlanId=" + id,
+                    dataType: "json",
+                    success: function (data) {
+                        document.getElementById(id).style.display = 'none';
+                    }
+                });
+                alert("删除成功!");
+            } else {
+                alert("操作取消!");
+            }
+        }
+
+        function edit3(i) {
+            document.getElementById("planLstId").value = intervalPlanList[i].planLstId;
+            console.log(intervalPlanList[i].departmentType)
+            console.log(intervalPlanList[i].departmentName)
+            $(`#departmentTypeT option[value=${intervalPlanList[i].departmentType}]`).attr('selected', 'selected');
+            console.log($(`#departmentTypeT option[value=${intervalPlanList[i].departmentType}]`).val())
+            getDepName();
+            $(`#departmentNameT option[value=${intervalPlanList[i].departmentName}]`).attr('selected','selected')
+            document.getElementById("departmentNameT").value = intervalPlanList[i].departmentName;
+            document.getElementById("weekT").value = intervalPlanList[i].week;
+            document.getElementById("bgnTmT").value = intervalPlanList[i].bgnTm;
+            document.getElementById("endTmT").value = intervalPlanList[i].endTm;
+            document.getElementById("registrationNumT").value = intervalPlanList[i].registrationNum;
+        }
+
+        function update3() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/updateIntervalPlanLst",
+                dataType: "json",
+                data: $("#form7").serialize(),
+                success: function (data) {
+                    alert(data.info)
+                    location.reload();
+                }
+            });
+        }
+
+        let depName = [
+            [],
+            ['血液科门诊', '呼吸内科门诊', '消化内科门诊', '普通内科门诊', '肿瘤内科门诊', '老年综合门诊', '心内科门诊', '肾内科门诊'],
+            ['心外科门诊', '胸外科门诊', '基本外科门诊', '急诊科', '整形美容外科门诊', '骨科门诊', '特需神经外科门诊'],
+            ['儿科门诊', '特需儿科门诊'],
+            ['口腔科门诊', '皮肤科白癜风教授门诊', '皮科门诊', '美容皮肤科门诊', '耳鼻喉科门诊', '皮肤科性病门诊', '眼科门诊']
+        ];
+
+        function getDepName() {
+            //获得科室下拉框的对象
+            let sltDepType = document.getElementsByName("departmentType")[0];
+            let sltDepType2 = document.getElementsByName("departmentType")[1];
+            //获得门诊下拉框的对象
+            let sltDepName = document.getElementsByName("departmentName")[0];
+            let sltDepName2 = document.getElementsByName("departmentName")[1];
+            //得到科室对应的门诊数组
+            let typeName = depName[sltDepType.selectedIndex];
+            let typeName2 = depName[sltDepType2.selectedIndex + 1];
+            console.log(sltDepType2.selectedIndex)
+            //清空门诊下拉框，仅留提示选项
+            sltDepName.length = 1;
+            sltDepName2.length = 1;
+            //将门诊数组中的值填充到门诊下拉框中
+            for (let i = 0, len = typeName.length; i < len; i++) {
+                sltDepName[i + 1] = new Option(typeName[i], typeName[i]);
+            }
+            for (let i = 0, len = typeName2.length; i < len; i++) {
+                sltDepName2[i + 1] = new Option(typeName2[i], typeName2[i]);
+            }
+        }
+
+        function getAjax(url, func) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    func(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        // 上一页
+        function previousPage() {
+            currentPage--;
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectIntervalPlanLst2", showInterPlanLst);
+            if (currentPage == 1) {
+                document.getElementById("prePage").innerHTML = '首页';
+                $("#prePage").attr("disabled", true);
+            }
+            if (currentPage != Math.ceil(intervalPlanList.length / pageSize)) {
+                document.getElementById("nextPage").innerHTML = '下一页';
+                $("#nextPage").attr("disabled", false);
+            }
+        }
+
+        // 下一页
+        function nextPage() {
+            currentPage++;
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectIntervalPlanLst2", showInterPlanLst);
+            if (currentPage == Math.ceil(intervalPlanList.length / pageSize)) {
+                document.getElementById("nextPage").innerHTML = '尾页';
+                $("#nextPage").attr("disabled", true);
+            }
+            if (currentPage != 1) {
+                document.getElementById("prePage").innerHTML = '上一页';
+                $("#prePage").attr("disabled", false);
+            }
+        }
+
+        // 跳至第几页
+        function skip() {
+            currentPage = $("#skipPage").val();
+            $("#skipPage").val('');
+            document.getElementById("cPage").innerHTML = currentPage;
+            getAjax("http://localhost:8080/selectIntervalPlanLst2", showInterPlanLst);
+        }
+
+        // 通过判断总页数及当前页改变按钮及输入框属性
+        function judgePage(totalPage, currentPage) {
+            if (totalPage == 1) {
+                document.getElementById("prePage").innerHTML = '首页';
+                $("#prePage").attr("disabled", true);
+                document.getElementById("nextPage").innerHTML = '尾页';
+                $("#nextPage").attr("disabled", true);
+                $("#skipPage").attr("disabled", true);
+                $("#confirm").attr("disabled", true);
+            } else {
+                $("#skipPage").attr("disabled", false);
+                $("#confirm").attr("disabled", false);
+                if (currentPage == 1) {
+                    document.getElementById("prePage").innerHTML = '首页';
+                    $("#prePage").attr("disabled", true);
+                    document.getElementById("nextPage").innerHTML = '下一页';
+                    $("#nextPage").attr("disabled", false);
+                } else if (currentPage == totalPage) {
+                    document.getElementById("nextPage").innerHTML = '尾页';
+                    $("#nextPage").attr("disabled", true);
+                    document.getElementById("prePage").innerHTML = '上一页';
+                    $("#prePage").attr("disabled", false);
+                } else {
+                    document.getElementById("prePage").innerHTML = '上一页';
+                    $("#prePage").attr("disabled", false);
+                    document.getElementById("nextPage").innerHTML = '下一页';
+                    $("#nextPage").attr("disabled", false);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

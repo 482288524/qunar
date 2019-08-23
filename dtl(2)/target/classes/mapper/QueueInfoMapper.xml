@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.QueueInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.QueueInfo">
+        <id column="queue_id" jdbcType="BIGINT" property="queueId"/>
+        <result column="pool_list_id" jdbcType="BIGINT" property="poolListId"/>
+        <result column="serial_tm" jdbcType="TIMESTAMP" property="serialTm"/>
+        <result column="bill_no" jdbcType="VARCHAR" property="billInfo"/>
+        <result column="queue_no" jdbcType="VARCHAR" property="queueNo"/>
+        <result column="enqueue_tm" jdbcType="TIMESTAMP" property="enqueueTm"/>
+        <result column="dequeue_tm" jdbcType="TIMESTAMP" property="dequeueTm"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="consultation_id" jdbcType="INTEGER" property="consultationId"/>
+        <result column="doctor_id" jdbcType="INTEGER" property="doctorId"/>
+    </resultMap>
+
+    <select id="getQueueInfo" parameterType="queueInfo" resultMap="BaseResultMap">
+        select * from t_queue_info q
+        where 1=1
+        <if test="queueInfo.poolListId != null and queueInfo.poolListId != ''">
+            AND q.pool_list_id like '%${queueInfo.poolListId}%'
+        </if>
+        <if test="queueInfo.serialTm != null and queueInfo.serialTm != ''">
+            AND q.serial_tm like '%${queueInfo.serialTm}%'
+        </if>
+        <if test="queueInfo.billInfo != null and queueInfo.billInfo != ''">
+            AND q.bill_no like '%${queueInfo.billInfo}%'
+        </if>
+        <if test="queueInfo.consultationId != null and queueInfo.consultationId != ''">
+            AND q.consultation_id = #{queueInfo.consultationId}
+        </if>
+        <if test="queueInfo.doctorId != null and queueInfo.doctorId != ''">
+            AND q.doctor_id = #{queueInfo.doctorId}
+        </if>
+        order by q.pool_list_id
+    </select>
+</mapper>

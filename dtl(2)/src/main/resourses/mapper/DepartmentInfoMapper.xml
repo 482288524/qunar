@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DepartmentInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.DepartmentInfo">
+        <id column="department_id" jdbcType="BIGINT" property="departmentId"/>
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="department_type" jdbcType="VARCHAR" property="departmentType"/>
+        <result column="department_status" jdbcType="INTEGER" property="departmentStatus"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+    </resultMap>
+
+    <select id="getDepartmentInfo" parameterType="departmentInfo" resultMap="BaseResultMap">
+        select * from t_department_info dp
+        where 1=1
+        <if test="departmentInfo.departmentId != null and departmentInfo.departmentId != ''">
+            AND dp.department_id = #{departmentInfo.departmentId}
+        </if>
+        <if test="departmentInfo.departmentType != null and departmentInfo.departmentType != ''">
+            AND dp.department_type = #{departmentInfo.departmentType}
+        </if>
+        <if test="departmentInfo.departmentName != null and departmentInfo.departmentName != ''">
+            AND dp.department_name like '%${departmentInfo.departmentName}%'
+        </if>
+        order by dp.department_id
+    </select>
+    
+    <select id="getAllDepartmentType" resultType="String">
+        select tdi. department_type from t_department_info tdi group by tdi.department_type order by tdi.department_id;
+    </select>
+
+    <select id="getDepartmentNameByType" parameterType="String" resultType="map">
+        select tdi.department_name name,tdi.department_id id from t_department_info tdi where tdi.department_type = #{type}
+    </select>
+
+    <select id="getDepartmentId" parameterType="String" resultType="Integer">
+        SELECT
+            tdi.department_id
+        FROM
+            t_department_info tdi
+        WHERE
+            tdi.department_name = #{departmentName}
+        LIMIT 1
+    </select>
+    
+</mapper>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>管理员个人中心</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/adminCenter.css" type="text/css">
+    <script src="../../jQuery/jQuery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.js"></script>
+    <script src="../../js/cookie.js"></script>
+    <!-- <script src="../../js/cancelRtIndex.js"></script> -->
+    <style>
+        #top .top-t .top-t-center #registBtn {
+            display: none;
+        }
+
+        #top .top-t .top-t-center #exit {
+            display: block;
+        }
+
+        #top .top-t .top-t-center #help {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="header"></div>
+        <div class="center">
+            <div class="left">
+                <div class="tx">
+                    <img src="../../images/tx_admin.png" width="256" height="256">
+                    <span>[<a class="index">首页</a>]</span>
+                    <span>[<a class="exit">退出</a>]</span>
+                </div>
+                <ul id="ul1">
+                    <li class="active"><a href="#hzgl" class="bt">患者管理</a></li>
+                    <li><a href="#ysgl" class="bt">医生管理</a></li>
+                    <li><a href="#ksgl" class="bt">科室管理</a></li>
+                    <li><a href="#zsgl" class="bt">诊室管理</a></li>
+                    <li><a href="#pbgl" class="bt">排班管理</a></li>
+                    <li><a href="#hygl" class="bt">号源池管理</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div class="patientManagement"></div>
+                <div class="doctorManagement"></div>
+                <div class="departmentManagement"></div>
+                <div class="consultationManagement"></div>
+                <div class="arrangementManagement"></div>
+                <div class="registrationManagement"></div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".header").load("../indexhtml/header.html");
+            $(".patientManagement").load("patientManagement.html");
+            $(".doctorManagement").load("doctorManagement.html");
+            $(".departmentManagement").load("departmentManagement.html");
+            $(".consultationManagement").load("consultationManagement.html");
+            $(".arrangementManagement").load("arrangementManagement.html");
+            $(".registrationManagement").load("registrationManagement.html");
+            $(".footer").load("../indexhtml/footer.html");
+            setTimeout(function(){
+                console.log($("#shouye").text())
+                $("#shouye").css('display','none');
+            },100)
+        });
+
+        window.onload = function () {
+            let ul1 = document.getElementById("ul1");
+            let li = ul1.getElementsByTagName("li");
+            let div = document.getElementsByClassName("xxk");
+            for (let i = 0,len = li.length; i < len; i++) {
+                li[i].index = i;
+                li[i].onclick = function () {
+                    for (let i = 0,len = li.length; i < len; i++) {
+                        li[i].className = "";
+                    }
+                    this.className = "active";
+                    for (let j = 0,len = li.length; j < len; j++) {
+                        div[j].className = "xxk hide";
+                    }
+                    div[this.index].className = "xxk show";
+                }
+            }
+
+            // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+            let trList = document.getElementsByTagName("tr");
+            for (let i = 0; i < trList.length; i++) {
+                changeColor(trList[i]);
+            }  
+        }
+        function changeColor(tr) {
+            tr.onmouseover = function () {
+                tr.style.backgroundColor = "#E0E0E0";
+            }
+            tr.onmouseout = function () {
+                tr.style.backgroundColor = "#fff"
+            }
+        }
+
+    </script>
+</body>
+
+</html>

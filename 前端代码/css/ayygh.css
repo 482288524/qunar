@@ -1,0 +1,162 @@
+#nav .nav ul li:nth-child(2) {
+    background-color: #1FA4F0;
+}
+
+.center {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 59px;
+}
+
+.center .hospitalLevel,
+.hospitalArea {
+    width: 1000px;
+    overflow: hidden;
+    padding-top: 15px;
+    height: auto;
+    background-color: #F8F8F8;
+}
+
+.center .hospitalArea {
+    padding-bottom: 8px;
+}
+
+.center .msg .left {
+    float: left;
+    padding-left: 16px;
+    width: 91px;
+    border-right: 1px solid #CCC;
+}
+
+.center .msg .left span {
+    display: inline-block;
+    margin-right: 6px;
+    text-align: center;
+    width: 75px;
+    height: 19px;
+    line-height: 19px;
+    font-size: 14px;
+}
+
+.center .msg ul .all {
+    padding: 0 5px;
+    background-color: #60BFF2;
+    color: #fff;
+}
+
+.center .msg ul {
+    float: left;
+    width: 842px;
+}
+
+.center .msg ul li {
+    float: left;
+    padding: 0 10px;
+    list-style: none;
+    border-right: 1px solid #CCC;
+}
+
+.center .msg a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.center .msg a:hover {
+    color: #00B3EC;
+}
+
+.center .bottom {
+    padding-top: 40px;
+    width: 1000px;
+    margin: 0 auto;
+    /* border: 1px solid #F4F6FA; */
+}
+
+.center .bottom div {
+    padding: 16px 14px;
+    height: 166px;
+    border: 1px solid #F4F6FA;
+    background-color: #FFF;
+}
+
+.center .bottom div img {
+    float: left;
+    width: 182px;
+    height: 132px;
+}
+
+.center .bottom div h5 {
+    float: left;
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 16px;
+    color: #000;
+}
+
+.center .bottom div span {
+    display: inline-block;
+    margin-left: 14px;
+    margin-top: 18px;
+    color: #F7B52C;
+}
+
+.center .bottom div p {
+    margin-left: 232px;
+    margin-top: 20px;
+    padding-left: 18px;
+    width: 538px;
+    color: #888;
+}
+
+.center .bottom div .phone{
+    background: url('../images/icon.png') 0 2px no-repeat;
+}
+
+.center .bottom div .address{
+    background: url('../images/icon.png') 0 -16px no-repeat;
+}
+
+.center .bottom div button {
+    float: right;
+    margin-top: -80px;
+    margin-right: 60px;
+    width: 105px;
+    height: 37px;
+    border: none;
+    outline: none;
+    background: url('../images/hos_yy_button.png') 0 0 no-repeat;
+}
+
+.center .bottom div button:hover {
+    background: url('../images/hos_yy_button.png') -105px 0 no-repeat;
+}
+
+.center #pageDiv {
+    margin: 20px auto 0;
+    width: 406px;
+}
+
+.center #pageDiv button {
+    margin-right: 8px;
+    width: auto;
+    height: 24px;
+    font-size: 14px;
+}
+
+.center #pageDiv input[type=number] {
+    width: 40px;
+    text-align: center;
+}
+
+.center #pageDiv .pageSpan {
+    margin-right: 10px;
+}
+
+.center #pageDiv #totalPage {
+    margin-right: 4px;
+}
+
+.center #pageDiv #cPage {
+    color: blue;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserFriendMapper">
+
+    <resultMap id="friendSInfo" type="com.vo.FriendListSimpleInfo">
+        <result column="remark" property="remark" javaType="String"></result>
+        <result column="headUrl" property="headUrl" javaType="String"></result>
+        <result column="friendId" property="friendId" javaType="Integer"></result>
+    </resultMap>
+
+    <resultMap id="friendInfo" type="com.vo.FriendInfo">
+        <result column="friendId" property="friendId" javaType="Integer"></result>
+        <result column="friendHeadUrl" property="friendHeadUrl" javaType="String"></result>
+        <result column="friendSex" property="friendSex" javaType="Integer"></result>
+        <result column="friendEmail" property="friendEmail" javaType="String"></result>
+        <result column="friendOCAccount" property="friendOCAccount" javaType="String"></result>
+        <result column="friendPetName" property="friendPetName" javaType="String"></result>
+        <result column="friendPerSign" property="friendPerSign" javaType="String"></result>
+        <result column="isLook" property="isLook" javaType="Integer"></result>
+        <result column="beLook" property="beLook" javaType="Integer"></result>
+        <result column="isBlack" property="isBlack" javaType="Integer"></result>
+        <result column="remark" property="remark" javaType="String"></result>
+    </resultMap>
+
+    <select id="getFriendSInfo" parameterType="String" resultMap="friendSInfo">
+        SELECT
+            uf.remark,
+            u.head_url headUrl,
+            uf.friend_id friendId
+        FROM
+            user_friend uf,
+            `user` u
+        WHERE
+            uf.friend_id = u.id
+            AND uf.user_id = #{userId}
+            AND uf.apply_status = 1
+        ORDER BY
+	        uf.remark
+    </select>
+
+    <select id="getFriendInfo" parameterType="map" resultMap="friendInfo">
+        SELECT
+            uf.friend_id friendId,
+            u.head_url friendHeadUrl,
+            u.sex friendSex,
+            u.email friendEmail,
+            u.user_name friendOCAccount,
+            u.pet_name friendPetName,
+            u.per_sig friendPerSign,
+            uf.is_look isLook,
+            uf.be_look beLook,
+            uf.is_black isBlack,
+            uf.remark remark
+        FROM
+            `user` u,
+             user_friend uf
+        WHERE
+            uf.friend_id = u.id
+            AND uf.user_id = #{userId}
+            AND uf.friend_id = #{friendId}
+    </select>
+
+</mapper>

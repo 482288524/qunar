@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AppointmentPoolMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.AppointmentPool">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="pool_list_id" jdbcType="BIGINT" property="poolListId"/>
+        <result column="bgn_tm" jdbcType="TIMESTAMP" property="bgnTm"/>
+        <result column="end_tm" jdbcType="TIMESTAMP" property="endTm"/>
+        <result column="serial_no" jdbcType="INTEGER" property="serialNo"/>
+        <result column="bill_no" jdbcType="VARCHAR" property="billInfo"/>
+        <result column="if_use" jdbcType="INTEGER" property="ifUse"/>
+    </resultMap>
+
+    <select id="getAppointmentPool" parameterType="appointmentPool" resultMap="BaseResultMap">
+        select * from t_appointment_pool apPool
+        where 1=1
+        <if test="appointmentPool.poolListId != null and appointmentPool.poolListId != ''">
+            AND apPool.pool_list_id like '%${appointmentPool.poolListId}%'
+        </if>
+        <if test="appointmentPool.bgnTm != null and appointmentPool.bgnTm != ''">
+            AND apPool.bgn_tm &gt; #{appointmentPool.bgnTm}
+        </if>
+        <if test="appointmentPool.endTm != null and appointmentPool.endTm != ''">
+            AND apPool.end_tm &lt; #{appointmentPool.endTm}
+        </if>
+        <if test="appointmentPool.serialNo != null and appointmentPool.serialNo != ''">
+            AND apPool.serial_no like '%${appointmentPool.serialNo}%'
+        </if>
+        <if test="appointmentPool.billInfo != null and appointmentPool.billInfo != ''">
+            AND apPool.bill_no like '%${appointmentPool.billInfo}%'
+        </if>
+        <if test="appointmentPool.ifUse != null and appointmentPool.ifUse != ''">
+            AND apPool.if_use = #{appointmentPool.ifUse}
+        </if>
+    </select>
+</mapper>

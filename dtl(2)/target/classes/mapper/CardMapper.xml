@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CardMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.Card">
+        <id column="card_id" jdbcType="INTEGER" property="cardId"/>
+        <result column="card_type" jdbcType="VARCHAR" property="cardType"/>
+        <result column="card_name" jdbcType="VARCHAR" property="cardName"/>
+    </resultMap>
+
+    <select id="getCard" parameterType="card" resultMap="BaseResultMap">
+        select * from t_card c
+        where 1=1
+        <if test="card.cardId != null and card.cardId != ''">
+            AND c.card_id = #{card.cardId}
+        </if>
+        <if test="card.type != null and card.type != ''">
+            AND c.card_type = #{card.cardType}
+        </if>
+        <if test="card.cardName != null and card.cardName != ''">
+            AND c.card_name like '%${card.cardName}%'
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ConsultationBusinessMapper">
+
+    <resultMap id="BaseResultMap" type="com.bean.ConsultationBusiness">
+        <id column="cb_id" jdbcType="INTEGER" property="cbId"/>
+        <result column="business_id" jdbcType="VARCHAR" property="businessId"/>
+        <result column="consultation_id" jdbcType="INTEGER" property="consultationId"/>
+    </resultMap>
+
+    <select id="getConsultationBusiness" parameterType="consultationBusiness" resultMap="BaseResultMap">
+        select * from t_consultation_business cb
+        where 1=1
+        <if test="consultationBusiness.businessId != null and consultationBusiness.businessId != ''">
+            AND cb.business_id = #{consultationBusiness.businessId}
+        </if>
+        <if test="consultationBusiness.consultationId != null and consultationBusiness.consultationId != ''">
+            AND cb.consultation_id = #{consultationBusiness.consultationId}
+        </if>
+    </select>
+
+</mapper>
