@@ -1,3 +1,0 @@
-$("#shouye").on('click',function(){
-
-});
