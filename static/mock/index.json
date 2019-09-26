@@ -1,0 +1,175 @@
+{
+    "ret": true,
+    "data": {
+        "swiperList": [
+            {
+                "id": "0001",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/6732b10fa1a3b08b883e4aebd2e37f44.jpg_750x200_83dd47e1.jpg"
+            },
+            {
+                "id": "0002",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/dd7c1ed57e6315e738545578e60212e4.jpg_750x200_8f87eb30.jpg"
+            },
+            {
+                "id": "0003",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/63ed7e7a00ebd2fdd72cbecdb14290da.jpg_750x200_545b3d63.jpg"
+            },
+            {
+                "id": "0004",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/e4af0603cf71d0892ed05554950477d2.jpg_750x200_43298d7a.jpg"
+            },
+            {
+                "id": "0005",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/2335e72b8f2638e416058c2ece34e3b0.jpg_750x200_33c8fcca.jpg"
+            },
+            {
+                "id": "0006",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20197/0645bd625b46216a55e3835d0f677ce2.jpg_750x200_1e9a0cbf.jpg"
+            },
+            {
+                "id": "0007",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20199/4e3f5a83099e6571ce4cad8609236121.jpg_750x200_48199ef2.jpg"
+            },
+            {
+                "id": "0008",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20198/da3db1d9761f8984fd9c84c4eccf93ee.jpg_750x200_b7f8686a.jpg"
+            }
+        ],
+        "iconList": [
+            {
+                "id": "001",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
+                "desc": "景点门票"
+            },
+            {
+                "id": "002",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png",
+                "desc": "动植物园"
+            },
+            {
+                "id": "003",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/3ef092d0a89ffddb7f781cda30c8ae49.png",
+                "desc": "暑期大促"
+            },
+            {
+                "id": "004",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/f5/c4c9d9830404e602.png",
+                "desc": "室内娱乐"
+            },
+            {
+                "id": "005",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png",
+                "desc": "一日游"
+            },
+            {
+                "id": "006",
+                "imgUrl": "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20198/0f18f305d448365942f04b085d8f58bb.png",
+                "desc": "上海玛雅水公园"
+            },
+            {
+                "id": "007",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png",
+                "desc": "上海野生"
+            },
+            {
+                "id": "008",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/de/f26be47a6bf02a02.png",
+                "desc": "上海迪士尼"
+            },
+            {
+                "id": "009",
+                "imgUrl": "https://img1.qunarzz.com/piao/fusion/1810/50/26ffa31b56646402.png",
+                "desc": "上海海昌"
+            },
+            {
+                "id": "010",
+                "imgUrl": "http://img1.qunarzz.com/piao/fusion/1803/b6/37560ece9c62b502.png",
+                "desc": "城市观光"
+            }
+        ],
+        "recommendList": [
+            {
+                "id": "0001",
+                "score": 5.0,
+                "comment": 263071,
+                "price": 394,
+                "imgUrl": "http://img1.qunarzz.com/sight/p0/1607/7c/7cda8b6782dabd80b4.img.jpg_200x200_2039e660.jpg",
+                "title": "上海迪士尼乐园洲",
+                "desc": "全球最大的迪士尼城堡",
+                "address": "浦东新区"
+            },
+            {
+                "id": "0002",
+                "score": 4.2,
+                "comment": 40024,
+                "price": 99,
+                "imgUrl": "http://img1.qunarzz.com/sight/p0/1811/e4/e4b9b471d2afc473a3.img.jpg_200x200_9a7794fc.jpg",
+                "title": "上海欢乐谷",
+                "desc": "敢上1200米长的木质过山车吗？",
+                "address": "松江区"
+            },
+            {
+                "id": "0003",
+                "score": 3.6,
+                "comment": 62027,
+                "price": 59.9,
+                "imgUrl": "http://img1.qunarzz.com/sight/p0/1908/60/60a42982845f7bf1a3.img.jpg_200x200_642f162d.jpg",
+                "title": "上海野生动物园",
+                "desc": "会跳芭蕾的小海狮们~",
+                "address": "浦东新区"
+            },
+            {
+                "id": "0004",
+                "score": 4.6,
+                "comment": 16051,
+                "price": 69,
+                "imgUrl": "http://img1.qunarzz.com/sight/p0/1906/19/19b7939928a0200da3.img.jpg_200x200_6879c7f7.jpg",
+                "title": "上海海昌海洋公园",
+                "desc": "感受海洋公园乐趣",
+                "address": "浦东新区"
+            },
+            {
+                "id": "0005",
+                "score": 3.2,
+                "comment": 83278,
+                "price": 80,
+                "imgUrl": "http://img1.qunarzz.com/tuan/team2/1507/2c/83e0e0e7ae082a.jpg_200x200_6d7378b2.jpg",
+                "title": "东方明珠",
+                "desc": "259米透明悬空观光廊了解一下~",
+                "address": "浦东新区"
+            }
+        ],
+        "weekendList": [
+            {
+                "id": "0001",
+                "imgUrl": "http://img1.qunarzz.com/sight/source/1505/7d/df6ff468331c43.jpg_r_640x214_1f3783d0.jpg",
+                "title": "上海必打卡",
+                "desc": "中西合璧，现代和传统各有各的精彩"
+            },
+            {
+                "id": "0002",
+                "imgUrl": "http://img1.qunarzz.com/sight/source/1603/ad/69b0fc5f48ad5f.jpg_r_640x214_b0fd5c7b.jpg",
+                "title": "周末亲子爱玩",
+                "desc": "走进自然或玩转乐园，感知大千世界，游乐项目惊险刺激，特色表演异彩纷呈，等你们~"
+            },
+            {
+                "id": "0003",
+                "imgUrl": "http://img1.qunarzz.com/sight/source/1511/1d/fe098e8cfec117.jpg_r_640x214_a9be292a.jpg",
+                "title": "上海城市观光",
+                "desc": "来这里寻找你所不认识的魔都 ，感受云端漫步，品味老上海风情，享受休闲时光"
+            },
+            {
+                "id": "0004",
+                "imgUrl": "http://img1.qunarzz.com/sight/source/1505/7b/2a6b0ce087f0e5.jpg_r_640x214_5c76b115.jpg",
+                "title": "情迷博物馆",
+                "desc": "走进艺术殿堂，电影博物馆生动演绎着电影人和电影背后的故事，你不想知道吗~"
+            },
+            {
+                "id": "0005",
+                "imgUrl": "http://img1.qunarzz.com/sight/source/1505/b7/2f4621a3a4e12c.jpg_r_640x214_d55c10ba.jpg",
+                "title": "学生最爱TOP10",
+                "desc": "学习之余最爱玩耍，爱玩的你不可错过"
+            }
+        ]
+    }
+}
