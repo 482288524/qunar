@@ -20,12 +20,14 @@
         data() {
             return {
                 swiperOption:{
-                pagination:{
-                    el: '.swiper-pagination',
-                    type:'fraction'
+                    pagination:{
+                        el: '.swiper-pagination',
+                        type:'fraction'
+                    },
+                    loop:true,
+                    observer:true,
+                    observeParents:true,
                 },
-                loop:true,
-            },
             }
         },
         methods:{

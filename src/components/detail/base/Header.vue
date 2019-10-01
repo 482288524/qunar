@@ -8,7 +8,11 @@
         </router-link>
         <!-- <h3 @click="handleScroll">点我触发</h3> -->
         <div class="header-fixed" v-show="!isShow" :style="styleObj">
-            <i class="header-goback iconfont icon-fanhui"></i>
+            <router-link 
+                class="header-goback iconfont icon-fanhui"
+                tag="i"
+                to="/">
+            </router-link>
             <h2 class="msg">景点详情</h2>
         </div>
     </div>
@@ -23,22 +27,6 @@
                 styleObj:{}
             }
         },
-        // mounted() {
-        //     
-        //     window.addEventListener('scroll',() => {
-        //         let scrollTop = document.documentElement.scrollTop ||
-        //                             window.pageYOffset ||
-        //                             document.body.scrollTop
-        //         
-        //         if (scrollTop > 50) {
-        //             this.isShow = false;
-        //         }else{
-        //             this.isShow = true;
-        //         }
-        //         this.styleObj = {opacity:(scrollTop-50)/100}
-        //         console.log('我滚了')
-        //     }, true);
-        // },
         methods:{
             // 监听滚动事件
             handleScroll(){

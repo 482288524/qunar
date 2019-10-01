@@ -4,6 +4,14 @@
                        :sightName="sightName"
                        :gallaryImgs="gallaryImgs"></detail-banner>
         <detail-header></detail-header>
+        <detail-card :cardInfo="cardInfo"></detail-card>
+        <detail-recommend :recommendInfo="recommendInfo">
+            <div class="border-bottom title-solt">
+                <i class="el-icon-s-promotion"></i>
+                <span class="det-rec-title">去哪儿推荐</span>
+            </div>
+        </detail-recommend>
+        <detail-calendar :calendarInfo="calendarInfo"></detail-calendar>
    </div>
 </template>
 
@@ -11,35 +19,54 @@
 import {getDetails} from '@/api'
 import DetailBanner from './base/Banner'
 import DetailHeader from './base/Header'
+import DetailCard from './base/Card'
+import DetailRecommend from './base/Recommend'
+import DetailCalendar from './base/Calendar'
     export default {
         name:'Detail',
         data() {
             return {
                 bannerImg:'',
                 sightName:'',
-                gallaryImgs:[]
+                gallaryImgs:[],
+                cardInfo:{},
+                recommendInfo:[],
+                calendarInfo:[]
             }
         },
         components:{
             DetailBanner,
-            DetailHeader
+            DetailHeader,
+            DetailCard,
+            DetailRecommend,
+            DetailCalendar
         },
         created(){
             this.getData()
         },
         methods:{
             async getData(){
-                let {bannerImg,sightName,gallaryImgs} = await getDetails(this.$route.params.id)
+                let {bannerImg,sightName,gallaryImgs,cardInfo,recommendInfo,calendarInfo} = await getDetails(this.$route.params.id)
                 this.bannerImg = bannerImg
                 this.sightName = sightName
                 this.gallaryImgs = gallaryImgs
-                // console.log(await getDetails(this.$route.params.id))
+                this.cardInfo = cardInfo
+                this.recommendInfo = recommendInfo
+                this.calendarInfo = calendarInfo
+                console.log(await getDetails(this.$route.params.id))
             }
         }
     }
 </script>
 
 <style lang='stylus' scoped>
+.border-bottom::before
+    border-color #bbb
 .detail 
     height 2000px
+    .title-solt
+        padding-top .2rem
+        .det-rec-title
+            font-size .36rem
+            line-height .88rem
 </style>
