@@ -19,3 +19,8 @@ export let getCities = () => {
 export let getDetails = (id) => {
     return axios.get('/static/mock/detail/'+id+'.json')
 }
+
+//请求week组件的数据接口
+export let getWeeks = (id) => {
+    return axios.get('/static/mock/week/'+id+'.json')
+}

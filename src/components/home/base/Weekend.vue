@@ -2,13 +2,19 @@
     <div>
         <h3 class="week-title">周末去哪儿</h3>
         <ul class="week-list">
-            <li class="week-item border-bottom" v-for="week in weekendList" :key="week.id">
+            <router-link 
+                tag="li" 
+                :to="{name:'weeklink',params:{id:week.id}}"
+                class="week-item border-bottom" 
+                v-for="(week,index) in weekendList" 
+                @click.native="handleClick(index)"
+                :key="week.id">
                 <img class="week-img" :src="week.imgUrl" alt="" />
                 <div class="week-info">
                     <h4>{{week.title}}</h4>
                     <div class="week-desc">{{week.desc}}</div>
                 </div>
-            </li>
+            </router-link>
         </ul>
     </div>
 </template>
@@ -19,6 +25,11 @@ export default {
     props: ["weekendList"],
     data() {
         return {};
+    },
+    methods:{
+        handleClick(index){
+            this.$store.commit('weekChange',this.weekendList[index].title)
+        }
     }
 };
 </script>

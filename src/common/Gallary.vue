@@ -25,8 +25,8 @@
                         type:'fraction'
                     },
                     loop:true,
-                    observer:true,
                     observeParents:true,
+                    observer:true,
                 },
             }
         },

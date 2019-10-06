@@ -13,7 +13,6 @@
         props:['cities'],
         data() {
             return {
-
             }
         },
         methods:{

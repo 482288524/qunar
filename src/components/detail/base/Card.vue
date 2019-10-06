@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card border-bottom">
         <div class="card-top">
             <div class="card-score">
                 <div class="card-score-t">
@@ -43,6 +43,9 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+.border-bottom::before 
+    border-color #E6E6E6
+    border-width .6rem
 .border-left::before,.border-top::before
     border-color #bbb
 .icon-jiantouyou::before
@@ -55,8 +58,7 @@ export default {
 .card
     position relative
     top -.1rem
-    padding .1rem .2rem 0
-    margin-bottom .1rem
+    padding .1rem .2rem .4rem
     border-radius .1rem .1rem 0 0 
     .card-top
         display flex

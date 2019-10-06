@@ -12,6 +12,7 @@
             </div>
         </detail-recommend>
         <detail-calendar :calendarInfo="calendarInfo"></detail-calendar>
+        <detail-comment :commentInfo="commentInfo"></detail-comment>
    </div>
 </template>
 
@@ -22,6 +23,7 @@ import DetailHeader from './base/Header'
 import DetailCard from './base/Card'
 import DetailRecommend from './base/Recommend'
 import DetailCalendar from './base/Calendar'
+import DetailComment from './base/Comment'
     export default {
         name:'Detail',
         data() {
@@ -31,7 +33,8 @@ import DetailCalendar from './base/Calendar'
                 gallaryImgs:[],
                 cardInfo:{},
                 recommendInfo:[],
-                calendarInfo:[]
+                calendarInfo:[],
+                commentInfo:[]
             }
         },
         components:{
@@ -39,21 +42,23 @@ import DetailCalendar from './base/Calendar'
             DetailHeader,
             DetailCard,
             DetailRecommend,
-            DetailCalendar
+            DetailCalendar,
+            DetailComment
         },
-        created(){
+        activated(){
             this.getData()
         },
         methods:{
             async getData(){
-                let {bannerImg,sightName,gallaryImgs,cardInfo,recommendInfo,calendarInfo} = await getDetails(this.$route.params.id)
+                let {bannerImg,sightName,gallaryImgs,cardInfo,recommendInfo,calendarInfo,commentInfo} = await getDetails(this.$route.params.id)
                 this.bannerImg = bannerImg
                 this.sightName = sightName
                 this.gallaryImgs = gallaryImgs
                 this.cardInfo = cardInfo
                 this.recommendInfo = recommendInfo
                 this.calendarInfo = calendarInfo
-                console.log(await getDetails(this.$route.params.id))
+                this.commentInfo = commentInfo
+                // console.log(await getDetails(this.$route.params.id))
             }
         }
     }
@@ -63,9 +68,8 @@ import DetailCalendar from './base/Calendar'
 .border-bottom::before
     border-color #bbb
 .detail 
-    height 2000px
+    height 1900px
     .title-solt
-        padding-top .2rem
         .det-rec-title
             font-size .36rem
             line-height .88rem

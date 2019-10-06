@@ -1,5 +1,5 @@
 <template>
-    <div class="recommend border-top">
+    <div class="recommend">
         <slot></slot>
         <div class="rec-center border-bottom" v-for="item in recommendInfo">
             <div class="center-left">
@@ -32,9 +32,6 @@ export default {
 <style lang='stylus' scoped>
 .border-bottom::before
     border-color #bbb
-.border-top::before 
-    border-color #E6E6E6
-    border-width .6rem
 .recommend
     padding 0 .2rem
     .rec-center
